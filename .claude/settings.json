@@ -11,7 +11,13 @@
         "HIGGSFIELD_API_KEY": "YOUR_HIGGSFIELD_API_KEY",
         "HIGGSFIELD_SECRET": "YOUR_HIGGSFIELD_SECRET"
       }
+    },
+    "nanobanana": {
+      "command": "npx",
+      "args": ["@aeven/nanobanana-mcp"],
+      "env": {
+        "NANOBANANA_API_KEY": "YOUR_NANOBANANA_API_KEY"
+      }
     }
-
   }
 }
