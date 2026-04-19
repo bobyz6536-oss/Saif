@@ -3,6 +3,14 @@
     "playwright": {
       "command": "npx",
       "args": ["@playwright/mcp@latest"]
+    },
+    "higgsfield": {
+      "command": "uvx",
+      "args": ["higgsfield-mcp"],
+      "env": {
+        "HIGGSFIELD_API_KEY": "YOUR_HIGGSFIELD_API_KEY",
+        "HIGGSFIELD_SECRET": "YOUR_HIGGSFIELD_SECRET"
+      }
     }
   }
 }
