@@ -36,14 +36,15 @@ jobs:
           HF_API_KEY: 1c3e9ae8-a47e-4c62-8ebf-786868ed46ad
           HF_API_SECRET: c5d1f864ee91c6390bf39398223718701c8c1d8f10961488e02da58c6eebae0a
         run: |
+          mkdir -p videos/oggetti-casuali/output
           cd videos/oggetti-casuali
-          python generate.py --text-only
+          python discover_endpoints.py
 
       - name: Commit results back to repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp videos/oggetti-casuali/output/results.json videos/oggetti-casuali/results-latest.json
+          cp videos/oggetti-casuali/output/discovery.json videos/oggetti-casuali/results-latest.json
           git add videos/oggetti-casuali/results-latest.json
           git diff --cached --quiet || git commit -m "ci: add generation results [skip ci]"
           git push origin HEAD
