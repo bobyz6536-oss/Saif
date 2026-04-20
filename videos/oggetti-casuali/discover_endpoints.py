@@ -12,28 +12,34 @@ os.environ["HF_API_SECRET"] = API_SECRET
 
 # Candidati endpoint da testare
 CANDIDATES = [
-    # Nano Banana image endpoints
-    "aeven/nano-banana/v2/text-to-image",
+    # Nano Banana — stesso formato seedance: provider/model/version/task
     "google/nano-banana/v2/text-to-image",
+    "google/nano-banana-2/v1/text-to-image",
+    "google/gemini/flash-image/text-to-image",
+    "aeven/nano-banana/v2/text-to-image",
+    "aeven/nano-banana-2/v1/text-to-image",
+    "higgsfield/nano-banana/v2/text-to-image",
     "nano-banana/v2/text-to-image",
-    "nano-banana-2/text-to-image",
-    "/jobs/nano-banana-2",
-    "jobs/nano-banana-2",
-    "nano-banana-2",
-    "aeven/nano-banana-2/text-to-image",
-    "nano-banana/v2.0/text-to-image",
-    # Kling video endpoints
-    "kling/v2.6/text-to-video",
-    "kling-ai/kling/v2.6/text-to-video",
+    "nano-banana-2/v1/text-to-image",
+    # Kling — stesso formato seedance
     "kuaishou/kling/v2.6/text-to-video",
+    "kuaishou/kling/v2-6/text-to-video",
+    "kling/v2.6/text-to-video",
+    "kling/v2-6/text-to-video",
+    "kling-ai/kling/v2.6/text-to-video",
+    "kuaishou/kling/v3.0/text-to-video",
+    "kling/v3.0/text-to-video",
+    # Image-to-video Kling
+    "kuaishou/kling/v2.6/image-to-video",
     "kling/v2.6/image-to-video",
-    "kling-ai/v2.6/image-to-video",
-    "/jobs/kling",
-    "jobs/kling",
-    "jobs/v2/kling3_0",
-    "/jobs/v2/kling3_0",
-    "kling3_0",
-    "kling-ai/kling/v3.0/text-to-video",
+    "kuaishou/kling/v3.0/image-to-video",
+    # Higgsfield generici
+    "higgsfield/kling/v2.6/text-to-video",
+    "higgsfield/kling/v2.6/image-to-video",
+    # Seedance Pro (conosciuto)
+    "bytedance/seedance/v1/text-to-video",
+    "bytedance/seedance/v1/pro/text-to-video",
+    "bytedance/seedance/v2/text-to-video",
 ]
 
 ARGS = {"prompt": "test", "aspect_ratio": "9:16"}
