@@ -1,42 +1,42 @@
 {
   "01-hook": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "02-bicicletta": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "03-materassino": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "04-aquilone": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "05-catapulta": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "06-pallone": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "07-skateboard": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "08-socrate": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "09-aereo": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   },
   "10-finale-cta": {
     "status": "error",
-    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
+    "error": "Not enough credits"
   }
 }
