@@ -9,6 +9,9 @@ on:
       - 'videos/oggetti-casuali/reference.jpg'
       - '.github/workflows/generate-video.yml'
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -17,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -41,7 +46,7 @@ jobs:
           cp videos/oggetti-casuali/output/results.json videos/oggetti-casuali/results-latest.json
           git add videos/oggetti-casuali/results-latest.json
           git diff --cached --quiet || git commit -m "ci: add generation results [skip ci]"
-          git push
+          git push origin HEAD
 
       - name: Upload generated videos
         uses: actions/upload-artifact@v4
