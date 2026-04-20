@@ -1,42 +1,42 @@
 {
   "01-hook": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "02-bicicletta": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "03-materassino": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "04-aquilone": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "05-catapulta": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "06-pallone": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "07-skateboard": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "08-socrate": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "09-aereo": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   },
   "10-finale-cta": {
     "status": "error",
-    "error": "Invalid credentials"
+    "error": "resolution: '720p' is not one of ['480', '720', '1080']"
   }
 }
