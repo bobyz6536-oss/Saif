@@ -1,13 +1,13 @@
 name: Generate Oggetti Casuali Video
 
 on:
-  workflow_dispatch:
-    inputs:
-      text_only:
-        description: 'Genera senza reference image (text-to-video)'
-        required: false
-        default: 'false'
-        type: boolean
+  push:
+    branches:
+      - claude/higgsfield-mcp-4aIfG
+    paths:
+      - 'videos/oggetti-casuali/generate.py'
+      - 'videos/oggetti-casuali/reference.jpg'
+      - '.github/workflows/generate-video.yml'
 
 jobs:
   generate:
@@ -26,29 +26,13 @@ jobs:
       - name: Install dependencies
         run: pip install higgsfield-client httpx
 
-      - name: Restore reference image from secret
-        if: ${{ inputs.text_only != 'true' }}
-        env:
-          REFERENCE_IMAGE_B64: ${{ secrets.REFERENCE_IMAGE_B64 }}
-        run: |
-          if [ -n "$REFERENCE_IMAGE_B64" ]; then
-            echo "$REFERENCE_IMAGE_B64" | base64 -d > videos/oggetti-casuali/reference.jpg
-            echo "Reference image restored from secret."
-          else
-            echo "Secret REFERENCE_IMAGE_B64 not set — will use text-to-video."
-          fi
-
       - name: Generate video scenes
         env:
           HF_API_KEY: afa68010-37cc-42ad-acee-af31b22e6460
           HF_API_SECRET: afa68010-37cc-42ad-acee-af31b22e6460
         run: |
           cd videos/oggetti-casuali
-          if [ "${{ inputs.text_only }}" = "true" ]; then
-            python generate.py --text-only
-          else
-            python generate.py
-          fi
+          python generate.py --text-only
 
       - name: Upload generated videos
         uses: actions/upload-artifact@v4
