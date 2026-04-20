@@ -197,7 +197,7 @@ def generate_scene(scene: dict, reference_url: str | None) -> str:
         "prompt": full_prompt,
         "duration": scene["duration"],
         "aspect_ratio": "9:16",
-        "resolution": "720p",
+        "resolution": "720",
     }
 
     if reference_url:
