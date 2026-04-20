@@ -1,9 +1,13 @@
 # 🎬 Video: "Come Raggiungere L'Altra Parte Del Mondo Con Oggetti Casuali"
 # Higgsfield / Seedance 2.0 — Scene-by-Scene Prompts
+# CHARACTER REFERENCE: transparent 3D human figure, glass-like translucent body, 
+# full skeleton visible inside (ivory/cream bones), realistic eyes, white studio background
 
 **Format:** 9:16 vertical (TikTok/Reels/Shorts)  
 **Total duration:** 60 seconds  
-**Art style:** Flat 2D cartoon animation, bold saturated colors, clean white background with colored accents, minimalist infographic elements, Italian comedy tone
+**Character style:** 3D photorealistic transparent human figure — semi-transparent frosted glass body, 
+full ivory skeleton clearly visible inside, realistic eyes, white seamless studio background, 
+clean soft shadows. Same character in every scene for consistency.
 
 ---
 
@@ -11,14 +15,13 @@
 
 **Prompt:**
 ```
-Flat 2D cartoon animation, bold graphic style, clean white background. 
-Three bold black text lines appear one by one with dramatic slam effect: 
-"Nessun aereo." then "Nessuna nave." then "Solo quello che hai in casa." 
-Each word slams into frame with a quick bounce. Final frame zooms in fast 
-on a confused cartoon Italian man holding random household objects 
-(bicycle, kite, catapult). Bold red and yellow accents. Quick smash cuts. 
-Dramatic orchestral comedy sting. Camera: static with punchy zoom-in. 
-Duration: 3 seconds.
+3D photorealistic transparent human figure, semi-transparent frosted glass body with full 
+ivory skeleton visible inside, realistic eyes wide open. White seamless studio background. 
+Character stands in T-pose center frame, then raises arms dramatically one by one. 
+Large bold black text appears slamming into frame: "Nessun aereo." — "Nessuna nave." — 
+"Solo quello che hai in casa." Each line hits with a shockwave ripple on the glass body. 
+Final frame: character shrugs with an exaggerated confused expression, skeleton shaking 
+inside the glass shell. Dramatic cinematic lighting, soft shadows. 9:16 vertical. 3 seconds.
 ```
 
 ---
@@ -27,15 +30,15 @@ Duration: 3 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Cheerful cartoon Italian man in a striped shirt 
-and red helmet riding a bicycle on a road. Animated infographic world map 
-in background showing Italy to Australia with a dotted red line path. 
-Bold text overlays: "20 km/h" and "800 ore". Man pedals confidently until 
-he reaches a cartoon blue ocean shoreline and stops with a comedic skid, 
-staring at the water with an exaggerated shocked expression, arms raised. 
-The bicycle sinks cartoon-style with a bubble. Bold flat colors, white 
-background with blue sea panel. Camera: side scroll then freeze frame. 
-Duration: 7 seconds.
+3D photorealistic transparent human figure with visible ivory skeleton inside glass body, 
+riding a bright red bicycle on a flat cartoon-stylized road. Wide Italian countryside 
+background, simplified flat pastel landscape. Bold infographic overlay: dotted red line 
+on a world map Italy to Australia, bold text "20 km/h — 800 ore". Character pedals 
+confidently — skeleton legs pumping visibly inside glass body. Reaches cartoon blue 
+ocean shoreline, slams brakes, skeleton jolts forward comically inside the glass shell. 
+Character stares at the water with huge realistic eyes wide in shock, arms spread. 
+Bicycle tips into ocean with a cartoon SPLASH. Soft studio rim lighting on character. 
+9:16 vertical. 7 seconds.
 ```
 
 ---
@@ -44,14 +47,14 @@ Duration: 7 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Cartoon Italian man lying on a bright pink 
-inflatable pool mattress floating on a flat cartoon Mediterranean Sea. 
-Animated infographic shows "0.5 nodi" with a slow arrow. A cartoonish 
-shark fin circles nearby. A blazing sun with a sweating face radiates 
-heat lines. The man looks miserable and sunburned. Bold text overlay: 
-"400 anni". Small dotted map shows he's still visible from the Italian 
-coast. Comedic wilting animation. Flat pastel sea, white background. 
-Camera: slow drift pan, then cut to overhead map view. Duration: 8 seconds.
+3D photorealistic transparent human figure with full skeleton visible inside glass body, 
+lying flat on a bright pink inflatable pool mattress floating on a flat stylized 
+Mediterranean Sea. Skeleton visibly slumping inside glass body from exhaustion. 
+Cartoonish shark fin circling. Blazing cartoon sun with a sweating face above. 
+Bold infographic text: "0.5 nodi — 400 anni". Character's glass body sunburned pink 
+tint, bones slightly rattling. A dotted map overlay shows character still 5km from 
+Italian coast. Deadpan realistic eyes staring at camera. Gentle ocean drift camera 
+movement then slow overhead map cut. Soft warm lighting. 9:16 vertical. 8 seconds.
 ```
 
 ---
@@ -60,15 +63,15 @@ Camera: slow drift pan, then cut to overhead map view. Duration: 8 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Cartoon Italian man holding a massive rainbow 
-diamond kite, being lifted off the ground. Animated wind arrows on a flat 
-cartoon sky background. Bold infographic text: "15 km/h". Man soars 
-confidently, then wind arrows suddenly flip direction with a comical 
-WHOOSH sound effect graphic. Flat animated map shows trajectory curving 
-south toward a cartoon "LIBIA" label with palm trees and desert. Man 
-arrives confused in the desert, kite tangled in a palm tree, hands 
-on head. Bold flat colors, bright sky blue. Camera: tracking shot then 
-wide reveal. Duration: 8 seconds.
+3D photorealistic transparent human figure with visible ivory skeleton, gripping strings 
+of a massive colorful diamond kite, being lifted off the ground. Skeleton arms stretched 
+upward visibly inside glass body. Bold infographic wind arrows on clear sky background. 
+Text overlay: "15 km/h — 44 giorni". Character soars up, grinning with realistic eyes. 
+Wind arrows suddenly flip — WHOOSH graphic — character spins cartoon-style, skeleton 
+rotating wildly inside glass shell. Flat animated map: trajectory arcs south toward 
+cartoon desert labeled "LIBIA" with palm trees. Character crash-lands in sand, kite 
+tangled in palm tree, glass body dusty, skeleton crumpled. Soft cinematic sky lighting. 
+9:16 vertical. 8 seconds.
 ```
 
 ---
@@ -77,15 +80,15 @@ wide reveal. Duration: 8 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Medieval wooden catapult in a cartoon Italian 
-backyard. Bold infographic: "Gittata: 300m" vs "Distanza: 16.000km" with 
-a tiny vs huge comparison bar. Cartoon Italian man in a helmet climbs into 
-the catapult bucket. LAUNCH — exaggerated arc trajectory — lands with a 
-CRASH in the neighbor's garden next door, crushing flower beds. Neighbor 
-(old Italian woman) stares in horror. A tiny cartoon police car with 
-flashing lights approaches from the street. Bold red and blue flash 
-overlays. White background, green garden. Camera: side angle launch arc 
-then zoom out. Duration: 7 seconds.
+3D photorealistic transparent human figure with full skeleton visible, climbing into 
+a medieval wooden catapult bucket in a stylized Italian backyard. Bold infographic: 
+"Gittata: 300m" vs "Distanza: 16.000km" comparison bar. Character tightens helmet 
+over glass skull — skeleton visible through helmet gap. LAUNCH — character flies in 
+a high arc across the screen, skeleton rattling visibly inside glass body during flight. 
+Lands with a comedic CRASH in neighbor's garden next door, crushing cartoon flowers. 
+Cartoon Italian neighbor woman gasps. Tiny police car with flashing lights approaches. 
+Red and blue flash light effects on glass body. Character waves sheepishly, 
+skeleton disheveled. 9:16 vertical. 7 seconds.
 ```
 
 ---
@@ -94,15 +97,15 @@ then zoom out. Duration: 7 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Colorful striped hot air balloon floating over 
-a flat cartoon ocean. Bold infographic: "30 km/h — 22 giorni". Suddenly 
-a PSSSSSS sound graphic appears, the balloon deflates cartoon-style and 
-plummets. Man falls in freefall with exaggerated wide eyes. Cut to: man 
-landing with a BOING on the pink inflatable mattress still floating in 
-the ocean (same one from Scene 3). The mattress man waves awkwardly. 
-New man waves back. Two miserable men on a tiny mattress in the middle 
-of the ocean. Flat blue ocean, white background. Camera: dramatic fall 
-shot then wide reveal. Duration: 7 seconds.
+3D photorealistic transparent human figure with visible ivory skeleton, standing in 
+the basket of a large colorful striped hot air balloon floating over stylized ocean. 
+Bold infographic: "30 km/h — 22 giorni". Character looks hopeful, skeleton upright. 
+Sudden PSSSSS deflation — balloon crumples, character free-falls, skeleton 
+arms and legs flailing wildly inside glass body mid-air. Crash landing BOING onto 
+the pink inflatable mattress in the ocean (from scene 3 — another identical 
+transparent skeleton figure already there, waves awkwardly). Two transparent skeleton 
+figures on a tiny pink mattress. Both stare at camera with deadpan realistic eyes. 
+Flat blue ocean, white horizon. 9:16 vertical. 7 seconds.
 ```
 
 ---
@@ -111,14 +114,15 @@ shot then wide reveal. Duration: 7 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Cartoon Italian man on a red skateboard with 
-a large firework/garden rocket taped to the back with duct tape. He lights 
-the fuse. WHOOOOSH — 4 seconds of blazing fire, speed lines, the man grins. 
-Abrupt stop, smoke puff. Bold text: "200 metri da casa". He looks back and 
-his house is still clearly visible. His eyebrows are gone — replaced with 
-scorched marks. He touches his forehead with a confused expression. Bold 
-text: "$0 spesi" with a green checkmark. Bold yellow/orange fire palette. 
-Camera: fast tracking shot then sudden freeze frame. Duration: 7 seconds.
+3D photorealistic transparent human figure with visible ivory skeleton, riding a red 
+skateboard with a large garden firework rocket duct-taped to the back. Character 
+crouches, lights fuse — skeleton visibly bracing inside glass body. WHOOOOSH — 
+blazing orange fire, speed lines, glass body glowing orange from rocket heat, 
+skeleton rattling at extreme speed. Abrupt STOP with smoke puff. Bold text overlay: 
+"200 metri da casa" — house clearly still visible in background. Character stands, 
+touches forehead — eyebrow area of glass body scorched black, skeleton unharmed. 
+Deadpan look at camera. Bold green text: "$0 spesi ✓". Skeleton does a defeated shrug. 
+9:16 vertical. 7 seconds.
 ```
 
 ---
@@ -127,15 +131,16 @@ Camera: fast tracking shot then sudden freeze frame. Duration: 7 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Ancient Greek philosopher Socrates appears from 
-off-screen in classic toga and sandals, completely uninvited. He surveys 
-the scene: the broken catapult, the deflated balloon, the scorched 
-skateboard. He strokes his beard with a knowing expression. He points at 
-the man and a speech bubble appears with bold italic text: "Perché vuoi 
-raggiungere l'altra parte del mondo... se non sai ancora dove sei tu?" 
-The man sits on the ground with a stunned expression. Full silence visual — 
-flatline graphic. White background, dramatic single spotlight. Camera: 
-slow zoom into Socrates' smug face, then reaction shot on man. Duration: 7 seconds.
+3D photorealistic transparent human figure with visible skeleton sits on the ground 
+surrounded by broken catapult, deflated balloon, scorched skateboard. Ancient Greek 
+philosopher Socrates — rendered in same 3D photorealistic style but with solid opaque 
+body in white toga — walks in from frame edge uninvited, stroking beard. He surveys 
+the wreckage. He turns to the transparent skeleton character and raises one finger. 
+A dramatic speech bubble appears with bold italic text: "Perché vuoi raggiungere 
+l'altra parte del mondo... se non sai ancora dove sei tu?" 
+Slow zoom onto Socrates' knowing face. Cut to skeleton character's realistic eyes 
+going wide. Character slowly sits down, skeleton slumping. Dramatic single spotlight 
+on both figures. Long silence pause. White background. 9:16 vertical. 7 seconds.
 ```
 
 ---
@@ -144,14 +149,14 @@ slow zoom into Socrates' smug face, then reaction shot on man. Duration: 7 secon
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Clean bright airport terminal scene. Cartoon 
-man stands at a ticket counter. Bold text price tag: "$400". He clicks 
-a button on a laptop — ticket printed. Cut to: man sitting in a 
-comfortable airplane seat with AC vent blowing and a meal tray in front 
-of him. He looks straight at camera with a deadpan expression and shrugs. 
-Bold green checkmark overlays. Infographic: "16 ore. Fine." Clean modern 
-airport palette — white, grey, blue. Camera: counter medium shot then 
-airplane interior close-up. Duration: 4 seconds.
+3D photorealistic transparent human figure with visible ivory skeleton at an airport 
+ticket counter. Clean bright modern airport background. Character taps laptop, a 
+plane ticket prints out — bold text: "$400". Skeleton hand reaches for ticket. 
+Cut to: same transparent skeleton character sitting in a comfortable airplane seat, 
+AC vent blowing cool air, meal tray in front. Skeleton visibly relaxed and reclined 
+inside glass body. Character looks directly at camera with deadpan realistic eyes 
+and gives a slow shrug. Bold green overlays: "16 ore. Fine." White and grey airport 
+palette. Soft warm cabin lighting on glass body. 9:16 vertical. 4 seconds.
 ```
 
 ---
@@ -160,33 +165,35 @@ airplane interior close-up. Duration: 4 seconds.
 
 **Prompt:**
 ```
-Flat 2D cartoon animation. Bold white text on solid bright red background: 
-"Con cosa raggiungeresti l'altra parte del mondo?" Text animates in with 
-a bouncy pop effect. Below: comment bubble icon with animated typing dots. 
-Bold arrows pointing down. Quick flash of the 6 objects (bicycle, 
-mattress, kite, catapult, balloon, skateboard) in a grid. Final freeze 
-on the red background with text. Camera: static. Duration: 2 seconds.
+Solid bright red background. 3D transparent skeleton character pops into frame center, 
+raises both glass arms wide — skeleton fully displayed. Bold white text bounces in: 
+"Con cosa raggiungeresti l'altra parte del mondo?" Below: animated comment bubble with 
+typing dots. Quick grid flash of 6 tiny object icons (bicycle, mattress, kite, catapult, 
+balloon, skateboard) each with a small transparent skeleton character using them. 
+Bold arrows pointing down. Character gives final wide-eyed stare at camera and 
+points directly at viewer. Freeze frame. 9:16 vertical. 2 seconds.
 ```
 
 ---
 
 ## Production Notes
 
-| Scene | Duration | Key Visual | Tone |
-|-------|----------|-----------|------|
-| Hook | 3s | Text slam + man reveal | Dramatic → absurd |
-| Bicicletta | 7s | Bicycle → sea | Confident → shocked |
-| Materassino | 8s | Mattress + shark | Miserable, slow |
-| Aquilone | 8s | Kite → Libya | Excited → confused |
-| Catapulta | 7s | Launch → neighbor's garden | Epic → tiny |
-| Pallone | 7s | Balloon deflates → mattress | Hopeful → defeated |
-| Skateboard | 7s | 4s of fire → 200m | Badass → embarrassing |
-| Socrate | 7s | Philosopher speech | Quiet, philosophical |
-| Soluzione | 4s | Airport / plane | Simple, deadpan |
-| Finale | 2s | CTA text | High energy |
+| Scene | Duration | Key Visual | Character Action |
+|-------|----------|-----------|-----------------|
+| Hook | 3s | Text slam | T-pose → shrug, skeleton shakes |
+| Bicicletta | 7s | Bike → ocean | Pedaling → shocked stop, skeleton jolts |
+| Materassino | 8s | Pink mattress + shark | Flat exhausted, bones slumping |
+| Aquilone | 8s | Kite → Libya | Flying → spinning, skeleton rotates |
+| Catapulta | 7s | Catapult arc | Helmet on → flight → crash, skeleton rattles |
+| Pallone | 7s | Balloon deflates | Freefall, skeleton flailing → two on mattress |
+| Skateboard | 7s | Rocket → 200m | Speed blur → stop, scorched eyebrows |
+| Socrate | 7s | Philosopher arrives | Sitting defeated, skeleton slumped |
+| Soluzione | 4s | Airport + plane | Ticket + relaxed in seat |
+| Finale | 2s | Red CTA | Arms wide, points at viewer |
 
 **Recommended Higgsfield Settings:**
-- Style: `cartoon` / `2d-animation`
+- Mode: `image-to-video` using `reference.jpg` for character consistency
+- Style: `photorealistic 3D`
 - Aspect ratio: `9:16`
-- Motion intensity: `high` for action scenes, `medium` for dialogue scenes
-- Generate each scene separately, then edit in sequence
+- Motion intensity: `high` for action scenes (2,4,5,6,7), `medium` for others
+- Seed: fix the same seed per scene for visual consistency

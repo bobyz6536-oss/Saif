@@ -1,12 +1,19 @@
 """
 Genera tutti i video delle 10 scene con Higgsfield API.
-Uso: python generate.py
+Usa image-to-video con il personaggio di riferimento (reference.jpg).
+
+Uso:
+  python generate.py                      # usa reference.jpg nella stessa cartella
+  python generate.py --text-only          # solo text-to-video, ignora reference
+
 Output: file .mp4 nella cartella output/
 """
 
 import os
+import sys
 import json
 import time
+import httpx
 import higgsfield_client as hf
 
 API_KEY = os.getenv("HF_API_KEY", "afa68010-37cc-42ad-acee-af31b22e6460")
@@ -15,181 +22,228 @@ API_SECRET = os.getenv("HF_API_SECRET", "afa68010-37cc-42ad-acee-af31b22e6460")
 os.environ["HF_API_KEY"] = API_KEY
 os.environ["HF_API_SECRET"] = API_SECRET
 
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")
+REFERENCE_IMG = os.path.join(SCRIPT_DIR, "reference.jpg")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# Prefisso stile personaggio da aggiungere a ogni prompt
+CHARACTER_PREFIX = (
+    "3D photorealistic transparent human figure, semi-transparent frosted glass body "
+    "with full ivory skeleton clearly visible inside, realistic eyes. "
+    "White seamless studio background, soft shadows. Same character as reference image. "
+)
 
 SCENES = [
     {
         "id": "01-hook",
-        "duration": 3,
+        "duration": 5,
         "prompt": (
-            "Flat 2D cartoon animation, bold graphic style, clean white background. "
-            "Three bold black text lines appear one by one with dramatic slam effect: "
-            "'Nessun aereo.' then 'Nessuna nave.' then 'Solo quello che hai in casa.' "
-            "Each word slams into frame with a quick bounce. Final frame zooms in fast "
-            "on a confused cartoon Italian man holding random household objects "
-            "(bicycle, kite, catapult). Bold red and yellow accents. Quick smash cuts. "
-            "9:16 vertical video."
+            "Character stands in T-pose center frame, arms spread wide, skeleton fully "
+            "displayed. Large bold black text slams into frame one line at a time: "
+            "'Nessun aereo.' — 'Nessuna nave.' — 'Solo quello che hai in casa.' "
+            "Each text impact creates a shockwave ripple through the glass body. "
+            "Final frame: character shrugs dramatically, skeleton rattling inside "
+            "glass shell. Dramatic cinematic lighting. 9:16 vertical."
         ),
     },
     {
         "id": "02-bicicletta",
         "duration": 7,
         "prompt": (
-            "Flat 2D cartoon animation. Cheerful cartoon Italian man in a striped shirt "
-            "and red helmet riding a bicycle on a road. Animated infographic world map "
-            "in background showing Italy to Australia with a dotted red line path. "
-            "Bold text overlays: '20 km/h' and '800 ore'. Man pedals confidently until "
-            "he reaches a cartoon blue ocean shoreline and stops with a comedic skid, "
-            "staring at the water with an exaggerated shocked expression, arms raised. "
-            "The bicycle sinks cartoon-style with a bubble. Bold flat colors, white "
-            "background with blue sea panel. 9:16 vertical video."
+            "Character riding a bright red bicycle on a flat stylized road. "
+            "Skeleton legs pumping visibly inside glass body. World map infographic "
+            "overlay: dotted red line Italy to Australia, bold text '20 km/h — 800 ore'. "
+            "Reaches cartoon blue ocean shoreline, slams brakes, skeleton jolts forward "
+            "comically inside glass shell. Character stares at the water, huge realistic "
+            "eyes wide in shock, arms spread. Bicycle tips into ocean with cartoon SPLASH. "
+            "9:16 vertical."
         ),
     },
     {
         "id": "03-materassino",
         "duration": 8,
         "prompt": (
-            "Flat 2D cartoon animation. Cartoon Italian man lying on a bright pink "
-            "inflatable pool mattress floating on a flat cartoon Mediterranean Sea. "
-            "Animated infographic shows '0.5 nodi' with a slow arrow. A cartoonish "
-            "shark fin circles nearby. A blazing sun with a sweating face radiates "
-            "heat lines. The man looks miserable and sunburned. Bold text overlay: "
-            "'400 anni'. Small dotted map shows he is still visible from the Italian "
-            "coast. Comedic wilting animation. Flat pastel sea, white background. "
-            "9:16 vertical video."
+            "Character lying flat on a bright pink inflatable pool mattress floating "
+            "on a stylized Mediterranean Sea. Skeleton visibly slumping inside glass body "
+            "from exhaustion. Cartoonish shark fin circling. Blazing cartoon sun above. "
+            "Bold infographic text: '0.5 nodi — 400 anni'. Glass body has a sunburned "
+            "pink tint. A dotted map shows character still 5km from Italian coast. "
+            "Deadpan realistic eyes staring at camera. Gentle ocean drift camera. "
+            "9:16 vertical."
         ),
     },
     {
         "id": "04-aquilone",
         "duration": 8,
         "prompt": (
-            "Flat 2D cartoon animation. Cartoon Italian man holding a massive rainbow "
-            "diamond kite, being lifted off the ground. Animated wind arrows on a flat "
-            "cartoon sky background. Bold infographic text: '15 km/h'. Man soars "
-            "confidently, then wind arrows suddenly flip direction with a comical "
-            "WHOOSH sound effect graphic. Flat animated map shows trajectory curving "
-            "south toward a cartoon 'LIBIA' label with palm trees and desert. Man "
-            "arrives confused in the desert, kite tangled in a palm tree. 9:16 vertical video."
+            "Character gripping strings of a massive colorful diamond kite, being lifted "
+            "off the ground. Skeleton arms stretched upward visibly inside glass body. "
+            "Bold infographic wind arrows on clear sky. Text overlay: '15 km/h — 44 giorni'. "
+            "Wind arrows suddenly flip — WHOOSH graphic — character spins, skeleton "
+            "rotating wildly inside glass shell. Flat map shows arc toward desert labeled "
+            "'LIBIA'. Character crash-lands in sand, glass body dusty, skeleton crumpled. "
+            "9:16 vertical."
         ),
     },
     {
         "id": "05-catapulta",
         "duration": 7,
         "prompt": (
-            "Flat 2D cartoon animation. Medieval wooden catapult in a cartoon Italian "
-            "backyard. Bold infographic: 'Gittata: 300m' vs 'Distanza: 16.000km' with "
-            "a tiny vs huge comparison bar. Cartoon Italian man in a helmet climbs into "
-            "the catapult bucket. LAUNCH, exaggerated arc trajectory, lands with a "
-            "CRASH in the neighbor's garden next door, crushing flower beds. Neighbor "
-            "old Italian woman stares in horror. A tiny cartoon police car with "
-            "flashing lights approaches from the street. Bold red and blue flash "
-            "overlays. White background, green garden. 9:16 vertical video."
+            "Character climbing into a medieval wooden catapult bucket in Italian backyard. "
+            "Bold infographic: 'Gittata: 300m' vs 'Distanza: 16.000km'. Character puts on "
+            "helmet over glass skull — skeleton visible. LAUNCH — flies in high arc, "
+            "skeleton rattling visibly inside glass body. Lands with CRASH in neighbor's "
+            "garden, crushing cartoon flowers. Old Italian neighbor woman gasps. Tiny "
+            "police car with flashing lights approaches. Red and blue flashes on glass body. "
+            "Character waves sheepishly. 9:16 vertical."
         ),
     },
     {
         "id": "06-pallone",
         "duration": 7,
         "prompt": (
-            "Flat 2D cartoon animation. Colorful striped hot air balloon floating over "
-            "a flat cartoon ocean. Bold infographic: '30 km/h, 22 giorni'. Suddenly "
-            "a PSSSSSS sound graphic appears, the balloon deflates cartoon-style and "
-            "plummets. Man falls in freefall with exaggerated wide eyes. Cut to: man "
-            "landing with a BOING on the pink inflatable mattress still floating in "
-            "the ocean. The mattress man waves awkwardly. New man waves back. Two "
-            "miserable men on a tiny mattress in the middle of the ocean. 9:16 vertical video."
+            "Character standing in basket of a large colorful striped hot air balloon "
+            "over stylized ocean. Bold infographic: '30 km/h — 22 giorni'. Skeleton "
+            "upright and hopeful. Sudden PSSSSS deflation — balloon crumples, character "
+            "free-falls, skeleton arms and legs flailing wildly inside glass body. "
+            "Crash BOING onto pink inflatable mattress in the ocean where another "
+            "identical transparent skeleton figure already sits and waves. "
+            "Two skeleton figures on tiny mattress, both stare deadpan at camera. "
+            "9:16 vertical."
         ),
     },
     {
         "id": "07-skateboard",
         "duration": 7,
         "prompt": (
-            "Flat 2D cartoon animation. Cartoon Italian man on a red skateboard with "
-            "a large firework garden rocket taped to the back with duct tape. He lights "
-            "the fuse. WHOOOOSH, 4 seconds of blazing fire, speed lines, the man grins. "
-            "Abrupt stop, smoke puff. Bold text: '200 metri da casa'. He looks back and "
-            "his house is still clearly visible. His eyebrows are gone, replaced with "
-            "scorched marks. He touches his forehead with a confused expression. Bold "
-            "text: '$0 spesi' with a green checkmark. 9:16 vertical video."
+            "Character riding a red skateboard with a large garden firework rocket "
+            "duct-taped to the back. Character crouches, skeleton visibly bracing. "
+            "Fuse lit — WHOOOOSH — blazing orange fire, speed lines, glass body glowing "
+            "orange, skeleton rattling at extreme speed. Abrupt STOP, smoke puff. "
+            "Bold text: '200 metri da casa' — house still visible in background. "
+            "Character touches forehead — eyebrow area of glass body scorched black, "
+            "skeleton intact. Deadpan stare at camera. Bold green: '$0 spesi'. "
+            "Skeleton does defeated shrug. 9:16 vertical."
         ),
     },
     {
         "id": "08-socrate",
         "duration": 7,
         "prompt": (
-            "Flat 2D cartoon animation. Ancient Greek philosopher Socrates appears from "
-            "off-screen in classic toga and sandals, completely uninvited. He surveys "
-            "the scene: the broken catapult, the deflated balloon, the scorched "
-            "skateboard. He strokes his beard with a knowing expression. He points at "
-            "the man and a speech bubble appears with bold italic text: "
+            "Transparent skeleton character sits on ground surrounded by broken catapult, "
+            "deflated balloon, scorched skateboard. Ancient Greek philosopher Socrates — "
+            "solid opaque figure in white toga — walks in from frame edge, stroking beard. "
+            "He surveys wreckage. Raises one finger. Dramatic speech bubble: "
             "'Perche vuoi raggiungere l altra parte del mondo se non sai ancora dove sei tu?' "
-            "The man sits on the ground with a stunned expression. White background, "
-            "dramatic single spotlight. 9:16 vertical video."
+            "Slow zoom onto Socrates' knowing face. Cut to skeleton character's eyes "
+            "going wide. Character slowly sits, skeleton slumping. Dramatic spotlight. "
+            "9:16 vertical."
         ),
     },
     {
         "id": "09-aereo",
-        "duration": 4,
+        "duration": 5,
         "prompt": (
-            "Flat 2D cartoon animation. Clean bright airport terminal scene. Cartoon "
-            "man stands at a ticket counter. Bold text price tag: '$400'. He clicks "
-            "a button on a laptop, ticket printed. Cut to: man sitting in a "
-            "comfortable airplane seat with AC vent blowing and a meal tray in front "
-            "of him. He looks straight at camera with a deadpan expression and shrugs. "
-            "Bold green checkmark overlays. Infographic: '16 ore. Fine.' 9:16 vertical video."
+            "Character at a bright modern airport ticket counter. Character taps laptop, "
+            "ticket prints — bold text '$400'. Skeleton hand reaches for ticket. "
+            "Cut to: same character in comfortable airplane seat, AC vent blowing, "
+            "meal tray visible. Skeleton visibly relaxed and reclined inside glass body. "
+            "Character looks directly at camera with deadpan eyes and slow shrug. "
+            "Bold green overlays: '16 ore. Fine.' Soft warm cabin lighting on glass body. "
+            "9:16 vertical."
         ),
     },
     {
         "id": "10-finale-cta",
-        "duration": 2,
+        "duration": 3,
         "prompt": (
-            "Flat 2D cartoon animation. Bold white text on solid bright red background: "
-            "'Con cosa raggiungeresti l altra parte del mondo?' Text animates in with "
-            "a bouncy pop effect. Below: comment bubble icon with animated typing dots. "
-            "Bold arrows pointing down. Quick flash of 6 objects in a grid: bicycle, "
-            "mattress, kite, catapult, balloon, skateboard. Final freeze on red. 9:16 vertical video."
+            "Solid bright red background. Character pops into center frame, raises both "
+            "glass arms wide, skeleton fully displayed. Bold white text bounces in: "
+            "'Con cosa raggiungeresti l altra parte del mondo?' Below: animated comment "
+            "bubble with typing dots. Grid of 6 tiny icons (bicycle, mattress, kite, "
+            "catapult, balloon, skateboard). Character gives final wide-eyed stare "
+            "and points directly at viewer. Freeze frame. 9:16 vertical."
         ),
     },
 ]
 
 
-def generate_scene(scene: dict) -> str:
+def upload_reference(img_path: str) -> str:
+    """Carica l'immagine di riferimento su Higgsfield e restituisce l'URL."""
+    print(f"Upload reference image: {img_path}")
+    result = hf.upload_image(img_path)
+    url = result.get("url") or result.get("image_url") or result.get("uri")
+    if not url:
+        raise RuntimeError(f"Upload fallito, risposta: {result}")
+    print(f"  Reference URL: {url}")
+    return url
+
+
+def download_video(url: str, out_path: str):
+    with httpx.stream("GET", url, follow_redirects=True) as r:
+        r.raise_for_status()
+        with open(out_path, "wb") as f:
+            for chunk in r.iter_bytes():
+                f.write(chunk)
+
+
+def generate_scene(scene: dict, reference_url: str | None) -> str:
     print(f"\n[{scene['id']}] Invio richiesta...")
-    result = hf.subscribe(
-        "bytedance/seedance/v1/lite/text-to-video",
-        arguments={
-            "prompt": scene["prompt"],
-            "duration": scene["duration"],
-            "aspect_ratio": "9:16",
-            "resolution": "720p",
-        },
-    )
+
+    full_prompt = CHARACTER_PREFIX + scene["prompt"]
+
+    args = {
+        "prompt": full_prompt,
+        "duration": scene["duration"],
+        "aspect_ratio": "9:16",
+        "resolution": "720p",
+    }
+
+    if reference_url:
+        # image-to-video: Higgsfield attiva questo mode quando image_url è presente
+        args["image_url"] = reference_url
+        endpoint = "bytedance/seedance/v1/lite/image-to-video"
+    else:
+        endpoint = "bytedance/seedance/v1/lite/text-to-video"
+
+    result = hf.subscribe(endpoint, arguments=args)
 
     if not result or "video" not in result:
         raise RuntimeError(f"Risposta inattesa: {result}")
 
     video_url = result["video"]["url"]
     out_path = os.path.join(OUTPUT_DIR, f"{scene['id']}.mp4")
-
-    import httpx
-    with httpx.stream("GET", video_url) as r:
-        r.raise_for_status()
-        with open(out_path, "wb") as f:
-            for chunk in r.iter_bytes():
-                f.write(chunk)
-
+    download_video(video_url, out_path)
     print(f"  Salvato: {out_path}")
     return out_path
 
 
 def main():
+    text_only = "--text-only" in sys.argv
+
     print("=== Generazione video 'Oggetti Casuali' ===")
     print(f"Output: {OUTPUT_DIR}\n")
+
+    # Upload reference image
+    reference_url = None
+    if not text_only:
+        if os.path.exists(REFERENCE_IMG):
+            try:
+                reference_url = upload_reference(REFERENCE_IMG)
+            except Exception as e:
+                print(f"ATTENZIONE: upload reference fallito ({e}), uso text-to-video.")
+        else:
+            print(
+                f"ATTENZIONE: reference.jpg non trovato in {SCRIPT_DIR}\n"
+                "  Salva il personaggio come 'reference.jpg' nella stessa cartella.\n"
+                "  Oppure usa --text-only per generare senza reference.\n"
+            )
 
     results = {}
     for scene in SCENES:
         try:
-            path = generate_scene(scene)
+            path = generate_scene(scene, reference_url)
             results[scene["id"]] = {"status": "ok", "path": path}
         except Exception as e:
             print(f"  ERRORE: {e}")
@@ -200,9 +254,8 @@ def main():
     with open(summary_path, "w") as f:
         json.dump(results, f, indent=2)
 
-    print(f"\n=== Completato ===")
     ok = sum(1 for r in results.values() if r["status"] == "ok")
-    print(f"{ok}/{len(SCENES)} scene generate con successo.")
+    print(f"\n=== Completato: {ok}/{len(SCENES)} scene ===")
     print(f"Riepilogo: {summary_path}")
 
 
