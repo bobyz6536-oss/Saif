@@ -1,5 +1,5 @@
 """
-Genera 10 scene video con Kling AI 2.6 (text-to-video) via Higgsfield API.
+Pipeline: Nanobanana (OpenRouter + Gemini Flash Image) → Kling AI 2.6 image-to-video
 Uso: python generate.py
 Output: file .mp4 in output/
 """
@@ -8,140 +8,222 @@ import os
 import sys
 import json
 import time
+import base64
+import tempfile
 import httpx
 import higgsfield_client as hf
 
-API_KEY    = os.getenv("HF_API_KEY",    "1c3e9ae8-a47e-4c62-8ebf-786868ed46ad")
-API_SECRET = os.getenv("HF_API_SECRET", "c5d1f864ee91c6390bf39398223718701c8c1d8f10961488e02da58c6eebae0a")
-os.environ["HF_API_KEY"]    = API_KEY
-os.environ["HF_API_SECRET"] = API_SECRET
+HF_API_KEY    = os.getenv("HF_API_KEY",    "1c3e9ae8-a47e-4c62-8ebf-786868ed46ad")
+HF_API_SECRET = os.getenv("HF_API_SECRET", "c5d1f864ee91c6390bf39398223718701c8c1d8f10961488e02da58c6eebae0a")
+NB_API_KEY    = os.getenv("NB_API_KEY",    "f5ecea0d5100fb4587b9ff4881ef813f")
+
+os.environ["HF_API_KEY"]    = HF_API_KEY
+os.environ["HF_API_SECRET"] = HF_API_SECRET
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-ENDPOINT = "kling-video/v2.6/pro/text-to-video"
+KLING_ENDPOINT = "kling-video/v2.6/pro/image-to-video"
 
 CHARACTER = (
     "3D photorealistic transparent human figure, semi-transparent frosted glass body "
-    "with full ivory skeleton clearly visible inside, realistic eyes. "
+    "with full ivory skeleton clearly visible inside, realistic detailed eyes. "
     "White seamless studio background, soft cinematic lighting. "
 )
 
 SCENES = [
     {
         "id": "01-hook",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "Character stands center frame arms spread wide, skeleton fully displayed. "
-            "Bold black text slams in one line at a time: 'Nessun aereo.' 'Nessuna nave.' "
-            "'Solo quello che hai in casa.' Each impact sends shockwave through glass body. "
-            "Final frame: dramatic shrug, skeleton rattling. Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Standing center frame arms spread wide, skeleton fully displayed. "
+            "Bold black text overlays: 'Nessun aereo.' 'Nessuna nave.' "
+            "Dramatic cinematic spotlight. Vertical 9:16 composition."
+        ),
+        "video_prompt": (
+            "Character raises arms dramatically, text lines slam into frame with shockwave effect "
+            "rippling through glass body. Skeleton rattles inside. Quick zoom in. Cinematic."
         ),
     },
     {
         "id": "02-bicicletta",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "Riding a bright red bicycle, skeleton legs pumping visibly inside glass body. "
-            "Italian countryside, world map overlay with dotted line Italy to Australia. "
-            "Bold text '20 km/h — 800 ore'. Reaches ocean, slams brakes, skeleton jolts forward, "
-            "shocked expression, bicycle sinks with splash. Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Riding a bright red bicycle on Italian road, skeleton legs pumping visibly. "
+            "World map overlay with dotted line Italy to Australia. Bold text '20 km/h'. "
+            "Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Character pedals confidently then reaches ocean, slams brakes, skeleton jolts forward, "
+            "shocked expression arms spread wide, bicycle sinks into water with cartoon splash."
         ),
     },
     {
         "id": "03-materassino",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "Lying exhausted on a bright pink inflatable mattress floating on calm sea. "
-            "Skeleton slumping inside glass body. Cartoon shark fin circling. Blazing sun above. "
-            "Bold text '400 anni'. Deadpan eyes stare at camera. Slow ocean drift. Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Lying exhausted on bright pink inflatable mattress floating on calm Mediterranean sea. "
+            "Skeleton slumping, shark fin nearby, blazing sun. Bold text '400 anni'. "
+            "Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Character lies miserable on drifting mattress. Shark fin circles slowly. "
+            "Sun beats down. Deadpan eyes stare at camera. Gentle ocean sway."
         ),
     },
     {
         "id": "04-aquilone",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "Gripping a massive colorful kite strings, lifted into sky, skeleton arms stretched up. "
-            "Wind arrows flip direction suddenly — WHOOSH — character spins wildly, "
-            "skeleton rotating inside glass shell. Crashes into desert sand near palm tree labeled LIBIA. "
-            "Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Gripping strings of massive colorful diamond kite being lifted into clear blue sky. "
+            "Skeleton arms stretched upward. Wind arrows visible. Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Character soars upward then wind arrows suddenly flip direction. "
+            "Character spins wildly, skeleton rotating inside glass shell. "
+            "Crashes into desert sand near palm tree."
         ),
     },
     {
         "id": "05-catapulta",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "Sitting in medieval catapult bucket wearing helmet over glass skull. "
-            "Bold text 'Gittata: 300m vs 16.000km'. LAUNCH — high arc, skeleton rattling in flight. "
-            "Crashes into neighbor's garden, old Italian woman gasps, police car arrives. Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Sitting inside medieval wooden catapult bucket, wearing helmet over glass skull. "
+            "Italian backyard. Bold infographic 'Gittata: 300m vs 16.000km'. Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Catapult launches character in wide arc, skeleton rattling in flight. "
+            "Crashes into neighbor's garden crushing flowers. Old Italian woman gasps. "
+            "Police car approaches with flashing lights."
         ),
     },
     {
         "id": "06-pallone",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "Standing in basket of colorful hot air balloon over ocean. Bold text '30 km/h — 22 giorni'. "
-            "Balloon deflates with PSSSSS, character freefalls, skeleton arms flailing. "
-            "Lands BOING on pink mattress in ocean where second skeleton figure already sits and waves. "
-            "Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Standing in basket of large colorful striped hot air balloon over ocean. "
+            "Skeleton upright and hopeful. Bold text '30 km/h'. Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Balloon suddenly deflates PSSSSS, character freefalls with skeleton arms flailing. "
+            "Lands with BOING on pink mattress in ocean. "
+            "Second skeleton figure already there waves awkwardly."
         ),
     },
     {
         "id": "07-skateboard",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "On red skateboard with garden rocket duct-taped behind. WHOOOOSH — 4 seconds blazing fire, "
-            "glass body glowing orange, skeleton rattling at speed. Abrupt stop, smoke puff. "
-            "House still visible in background. Eyebrows scorched off. Bold '$0 spesi'. Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Crouching on red skateboard with large garden rocket duct-taped behind. "
+            "Skeleton bracing inside glass body, fuse lit. Suburban street. Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Rocket fires 4 seconds of blazing orange fire, glass body glowing, skeleton rattling. "
+            "Abrupt stop with smoke puff. House still visible behind. "
+            "Character touches forehead — eyebrows scorched off. Deadpan stare at camera."
         ),
     },
     {
         "id": "08-socrate",
-        "duration": "5",
-        "prompt": CHARACTER + (
+        "image_prompt": CHARACTER + (
             "Sitting on ground among broken catapult, deflated balloon, scorched skateboard. "
-            "Socrates in white toga walks in uninvited, strokes beard, raises finger. "
-            "Speech bubble: 'Perche vuoi raggiungere l altra parte del mondo se non sai dove sei tu?' "
-            "Skeleton slumps. Dramatic spotlight silence. Vertical 9:16."
+            "Ancient Greek philosopher Socrates in white toga stands nearby pointing one finger. "
+            "Dramatic spotlight. Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Socrates walks in uninvited, surveys wreckage, strokes beard, raises finger. "
+            "Speech bubble appears: 'Perche vuoi raggiungere l altra parte del mondo se non sai dove sei tu?' "
+            "Character's skeleton slowly slumps. Long dramatic silence."
         ),
     },
     {
         "id": "09-aereo",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "At bright airport ticket counter, taps laptop, ticket prints — bold '$400'. "
-            "Cut to relaxed in airplane seat, AC vent blowing, meal tray in front. "
-            "Deadpan shrug at camera. Bold green '16 ore. Fine.' Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Standing at bright modern airport ticket counter, laptop open, ticket printing. "
+            "Bold price tag '$400'. Clean airport background. Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Character taps laptop, ticket prints. Cut to sitting relaxed in airplane seat, "
+            "AC vent blowing, meal tray in front. Deadpan shrug at camera. "
+            "Bold green text '16 ore. Fine.' overlays."
         ),
     },
     {
         "id": "10-finale-cta",
-        "duration": "5",
-        "prompt": CHARACTER + (
-            "Against solid bright red background, arms raised wide, skeleton fully displayed. "
-            "Bold white text bounces in: 'Con cosa raggiungeresti l altra parte del mondo?' "
-            "Comment bubble with typing dots. Character points directly at viewer. Freeze frame. Vertical 9:16."
+        "image_prompt": CHARACTER + (
+            "Arms raised wide against solid bright red background, skeleton fully displayed. "
+            "Bold white text: 'Con cosa raggiungeresti l altra parte del mondo?' "
+            "Comment bubble with typing dots below. Vertical 9:16."
+        ),
+        "video_prompt": (
+            "Character pops into frame raising arms wide. Text bounces in. "
+            "Character points directly at viewer with dramatic zoom. Freeze frame."
         ),
     },
 ]
 
 
-def download(url: str, path: str):
-    with httpx.stream("GET", url, follow_redirects=True, timeout=60) as r:
-        r.raise_for_status()
-        with open(path, "wb") as f:
-            for chunk in r.iter_bytes():
-                f.write(chunk)
+def generate_image(scene: dict) -> str:
+    """Genera immagine con Nanobanana (OpenRouter + Gemini Flash Image). Restituisce path file."""
+    print(f"  [Nanobanana] Genero immagine...")
+    resp = httpx.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers={
+            "Authorization": f"Bearer {NB_API_KEY}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://github.com/bobyz6536-oss/Saif",
+        },
+        json={
+            "model": "google/gemini-2.5-flash-image",
+            "messages": [{"role": "user", "content": scene["image_prompt"]}],
+        },
+        timeout=120,
+    )
+    resp.raise_for_status()
+    data = resp.json()
+
+    # Estrai immagine base64 dalla risposta
+    img_bytes = None
+    for choice in data.get("choices", []):
+        content = choice.get("message", {}).get("content", "")
+        if isinstance(content, list):
+            for part in content:
+                if isinstance(part, dict):
+                    if part.get("type") == "image_url":
+                        url = part["image_url"]["url"]
+                        if url.startswith("data:"):
+                            img_bytes = base64.b64decode(url.split(",", 1)[1])
+                    elif part.get("type") == "inline_data":
+                        img_bytes = base64.b64decode(part["inline_data"]["data"])
+        elif isinstance(content, str) and "data:image" in content:
+            start = content.find("data:image")
+            b64 = content[start:].split(",", 1)[1].split('"')[0].split("'")[0]
+            img_bytes = base64.b64decode(b64)
+
+    if not img_bytes:
+        raise RuntimeError(f"Nessuna immagine nella risposta: {json.dumps(data)[:300]}")
+
+    img_path = os.path.join(OUTPUT_DIR, f"{scene['id']}.jpg")
+    with open(img_path, "wb") as f:
+        f.write(img_bytes)
+    print(f"  Immagine salvata: {img_path}")
+    return img_path
 
 
-def generate_scene(scene: dict) -> str:
-    print(f"  Invio a Kling 2.6...")
+def upload_image(img_path: str) -> str:
+    """Carica immagine su Higgsfield e restituisce URL."""
+    print(f"  [Higgsfield] Carico immagine...")
+    result = hf.upload_file(img_path)
+    url = result.get("url") or result.get("image_url") or result.get("uri")
+    if not url:
+        raise RuntimeError(f"Upload fallito: {result}")
+    print(f"  URL: {url}")
+    return url
+
+
+def generate_video(scene: dict, image_url: str) -> str:
+    """Anima l'immagine con Kling AI 2.6. Restituisce path MP4."""
+    print(f"  [Kling 2.6] Animo immagine...")
     result = hf.subscribe(
-        ENDPOINT,
+        KLING_ENDPOINT,
         arguments={
-            "prompt": scene["prompt"],
-            "duration": scene["duration"],
+            "prompt": scene["video_prompt"],
+            "image_url": image_url,
+            "duration": "5",
             "aspect_ratio": "9:16",
             "cfg_scale": 0.5,
         },
@@ -156,19 +238,27 @@ def generate_scene(scene: dict) -> str:
         raise RuntimeError(f"Nessun URL video: {result}")
 
     out_path = os.path.join(OUTPUT_DIR, f"{scene['id']}.mp4")
-    download(video_url, out_path)
-    print(f"  Salvato: {out_path}")
+    with httpx.stream("GET", video_url, follow_redirects=True, timeout=120) as r:
+        r.raise_for_status()
+        with open(out_path, "wb") as f:
+            for chunk in r.iter_bytes():
+                f.write(chunk)
+    print(f"  Video: {out_path}")
     return out_path
 
 
 def main():
-    print(f"=== Kling AI 2.6 — 10 scene ===\n")
+    print("=== Pipeline: Nanobanana → Kling AI 2.6 ===\n")
     results = {}
     for scene in SCENES:
         print(f"\n[{scene['id']}]")
         try:
-            path = generate_scene(scene)
-            results[scene["id"]] = {"status": "ok", "path": path}
+            img_path = generate_image(scene)
+            time.sleep(1)
+            img_url = upload_image(img_path)
+            time.sleep(1)
+            mp4_path = generate_video(scene, img_url)
+            results[scene["id"]] = {"status": "ok", "path": mp4_path}
         except Exception as e:
             print(f"  ERRORE: {e}")
             results[scene["id"]] = {"status": "error", "error": str(e)}
