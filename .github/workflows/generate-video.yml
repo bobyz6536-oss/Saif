@@ -33,7 +33,7 @@ jobs:
 
       - name: Generate video scenes
         env:
-          HF_API_KEY: afa68010-37cc-42ad-acee-af31b22e6460
+          HF_API_KEY: 1c3e9ae8-a47e-4c62-8ebf-786868ed46ad
           HF_API_SECRET: c5d1f864ee91c6390bf39398223718701c8c1d8f10961488e02da58c6eebae0a
         run: |
           cd videos/oggetti-casuali
