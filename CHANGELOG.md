@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.1.0] — 2026-04-20
+
+### 新增 Added
+
+#### 行业专项 Industry-Specific
+- `16-usa-americana` — 美国风情 | USA landscapes, patriotic content, Americana culture, road trips
+
+#### Claude 技能 Claude Skills
+- `.claude/skills/seedance-3d-cgi` — 3D CGI 提示词生成器 | Kling/Seedance 2.0 3D CGI prompt generator skill for Claude Code
+
+#### 配置 Configuration
+- Higgsfield MCP server configured with API credentials via `settings.local.json`
+
+### 统计 Stats
+- 32 个 SKILL.md 文件 | 32 SKILL.md files (16 EN + 16 ZH)
+- 1 个 Claude Code 技能文件 | 1 Claude Code skill file
+
+---
+
 ## [1.0.0] — 2026-04-09
 
 ### 新增 Added
