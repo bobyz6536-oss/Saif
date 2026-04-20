@@ -1,42 +1,22 @@
 {
-  "01-hook": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "02-bicicletta": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "03-materassino": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "04-aquilone": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "05-catapulta": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "06-pallone": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "07-skateboard": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "08-socrate": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "09-aereo": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "10-finale-cta": {
-    "status": "error",
-    "error": "Model not found"
-  }
+  "aeven/nano-banana/v2/text-to-image": "Model not found",
+  "google/nano-banana/v2/text-to-image": "Model not found",
+  "nano-banana/v2/text-to-image": "Model not found",
+  "nano-banana-2/text-to-image": "Model not found",
+  "/jobs/nano-banana-2": "Model not found",
+  "jobs/nano-banana-2": "Model not found",
+  "nano-banana-2": "Model not found",
+  "aeven/nano-banana-2/text-to-image": "Model not found",
+  "nano-banana/v2.0/text-to-image": "Model not found",
+  "kling/v2.6/text-to-video": "Model not found",
+  "kling-ai/kling/v2.6/text-to-video": "Model not found",
+  "kuaishou/kling/v2.6/text-to-video": "Model not found",
+  "kling/v2.6/image-to-video": "Model not found",
+  "kling-ai/v2.6/image-to-video": "Model not found",
+  "/jobs/kling": "Model not found",
+  "jobs/kling": "Model not found",
+  "jobs/v2/kling3_0": "Model not found",
+  "/jobs/v2/kling3_0": "Model not found",
+  "kling3_0": "Model not found",
+  "kling-ai/kling/v3.0/text-to-video": "Model not found"
 }
