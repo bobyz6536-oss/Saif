@@ -1,42 +1,42 @@
 {
   "01-hook": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "02-bicicletta": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "03-materassino": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "04-aquilone": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "05-catapulta": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "06-pallone": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "07-skateboard": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "08-socrate": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "09-aereo": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   },
   "10-finale-cta": {
     "status": "error",
-    "error": "duration: '5' is not one of [5, 10]"
+    "error": "Client error '401 Unauthorized' for url 'https://openrouter.ai/api/v1/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401"
   }
 }
