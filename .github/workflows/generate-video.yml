@@ -5,8 +5,7 @@ on:
     branches:
       - claude/higgsfield-mcp-4aIfG
     paths:
-      - 'videos/oggetti-casuali/generate.py'
-      - 'videos/oggetti-casuali/reference.jpg'
+      - 'videos/oggetti-casuali/**'
       - '.github/workflows/generate-video.yml'
 
 permissions:
