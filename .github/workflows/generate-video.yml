@@ -40,8 +40,8 @@ jobs:
 
       - name: Generate video scenes
         env:
-          HF_API_KEY: ${{ secrets.HF_API_KEY }}
-          HF_API_SECRET: ${{ secrets.HF_API_SECRET }}
+          HF_API_KEY: afa68010-37cc-42ad-acee-af31b22e6460
+          HF_API_SECRET: afa68010-37cc-42ad-acee-af31b22e6460
         run: |
           cd videos/oggetti-casuali
           if [ "${{ inputs.text_only }}" = "true" ]; then
