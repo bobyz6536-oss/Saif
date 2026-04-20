@@ -12,34 +12,28 @@ os.environ["HF_API_SECRET"] = API_SECRET
 
 # Candidati endpoint da testare
 CANDIDATES = [
-    # Nano Banana — stesso formato seedance: provider/model/version/task
-    "google/nano-banana/v2/text-to-image",
-    "google/nano-banana-2/v1/text-to-image",
-    "google/gemini/flash-image/text-to-image",
-    "aeven/nano-banana/v2/text-to-image",
-    "aeven/nano-banana-2/v1/text-to-image",
-    "higgsfield/nano-banana/v2/text-to-image",
+    # Kling — formato corretto dai docs: kling-video/v2.1/pro/image-to-video
+    "kling-video/v2.6/pro/image-to-video",
+    "kling-video/v2.6/standard/image-to-video",
+    "kling-video/v2.6/pro/text-to-video",
+    "kling-video/v2.6/standard/text-to-video",
+    "kling-video/v2.1/pro/image-to-video",       # noto dai docs
+    "kling-video/v2.1/standard/image-to-video",
+    "kling-video/v2.1/pro/text-to-video",
+    # Nano Banana — stesso pattern: provider/model/version/quality/task
+    "nano-banana/v2/pro/text-to-image",
+    "nano-banana/v2/standard/text-to-image",
     "nano-banana/v2/text-to-image",
-    "nano-banana-2/v1/text-to-image",
-    # Kling — stesso formato seedance
-    "kuaishou/kling/v2.6/text-to-video",
-    "kuaishou/kling/v2-6/text-to-video",
-    "kling/v2.6/text-to-video",
-    "kling/v2-6/text-to-video",
-    "kling-ai/kling/v2.6/text-to-video",
-    "kuaishou/kling/v3.0/text-to-video",
-    "kling/v3.0/text-to-video",
-    # Image-to-video Kling
-    "kuaishou/kling/v2.6/image-to-video",
-    "kling/v2.6/image-to-video",
-    "kuaishou/kling/v3.0/image-to-video",
-    # Higgsfield generici
-    "higgsfield/kling/v2.6/text-to-video",
-    "higgsfield/kling/v2.6/image-to-video",
-    # Seedance Pro (conosciuto)
-    "bytedance/seedance/v1/text-to-video",
+    "nano-banana-2/pro/text-to-image",
+    "nano-banana-2/standard/text-to-image",
+    "nano-banana-2/text-to-image",
+    "google/nano-banana/v2/text-to-image",
+    "google/nano-banana-2/text-to-image",
+    "aeven/nano-banana/v2/pro/text-to-image",
+    "aeven/nano-banana-2/pro/text-to-image",
+    # Seedance Pro confermato
     "bytedance/seedance/v1/pro/text-to-video",
-    "bytedance/seedance/v2/text-to-video",
+    "bytedance/seedance/v1/pro/image-to-video",
 ]
 
 ARGS = {"prompt": "test", "aspect_ratio": "9:16"}
