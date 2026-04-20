@@ -1,0 +1,42 @@
+{
+  "01-hook": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "02-bicicletta": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "03-materassino": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "04-aquilone": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "05-catapulta": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "06-pallone": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "07-skateboard": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "08-socrate": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "09-aereo": {
+    "status": "error",
+    "error": "Invalid credentials"
+  },
+  "10-finale-cta": {
+    "status": "error",
+    "error": "Invalid credentials"
+  }
+}
