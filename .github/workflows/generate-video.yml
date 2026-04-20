@@ -34,6 +34,15 @@ jobs:
           cd videos/oggetti-casuali
           python generate.py --text-only
 
+      - name: Commit results back to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp videos/oggetti-casuali/output/results.json videos/oggetti-casuali/results-latest.json
+          git add videos/oggetti-casuali/results-latest.json
+          git diff --cached --quiet || git commit -m "ci: add generation results [skip ci]"
+          git push
+
       - name: Upload generated videos
         uses: actions/upload-artifact@v4
         with:
