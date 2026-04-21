@@ -125,53 +125,74 @@ async def do_login(page):
     await asyncio.sleep(4)
     await screenshot(page, "01_homepage")
 
-    # Chiudi cookie banner via JS (più affidabile di click)
-    await page.evaluate("""
-        () => {
-            const btns = [...document.querySelectorAll('button')];
-            const accept = btns.find(b => /accept/i.test(b.textContent));
-            if (accept) accept.click();
-        }
-    """)
-    await asyncio.sleep(1)
+    # Salva diagnostics pagina
+    info = await get_page_info(page)
+    results["_page_info"] = info
+    print(f"  Buttons visibili: {info['buttons'][:6]}")
 
-    # Clicca Login via JS (bypassa overlay)
-    clicked = await page.evaluate("""
-        () => {
-            const links = [...document.querySelectorAll('a')];
-            const login = links.find(a => /^login$/i.test(a.textContent.trim()));
-            if (login) { login.click(); return true; }
-            return false;
-        }
-    """)
-    print(f"  Login JS click: {clicked}")
+    # Chiudi cookie banner prima di tutto
+    for sel in ["button:has-text('Accept All')", "button:has-text('Accept')",
+                "button:has-text('OK')", "button:has-text('Agree')"]:
+        try:
+            btn = page.locator(sel).first
+            if await btn.is_visible(timeout=1500):
+                await btn.click(force=True)
+                await asyncio.sleep(2)
+                print("  Cookie banner chiuso")
+                break
+        except Exception:
+            pass
+
+    # Clicca Login con force=True (bypassa overlay Radix/cookie)
+    login = page.locator("a:has-text('Login')").first
+    try:
+        await login.wait_for(state="attached", timeout=5000)
+        await login.scroll_into_view_if_needed()
+        await login.click(force=True, timeout=5000)
+        print("  Login cliccato (force)")
+    except Exception as e:
+        print(f"  Login click fallito: {e}, provo via evaluate...")
+        # Fallback: triggera React click via dispatchEvent
+        await page.evaluate("""
+            () => {
+                const links = [...document.querySelectorAll('a')];
+                const login = links.find(l => l.textContent.trim() === 'Login');
+                if (login) {
+                    login.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
+                }
+            }
+        """)
+
     await asyncio.sleep(5)
-    await screenshot(page, "02_modal")
+    await screenshot(page, "02_dopo_login_click")
 
-    # Attendi input email (Clerk modal carica in modo asincrono)
+    # Poll per email input (max 30s)
     email_input = None
-    for attempt in range(12):  # max 24s
+    for attempt in range(15):
         await asyncio.sleep(2)
-        for sel in [
-            "input[type='email']", "input[name='identifier']",
-            "input[autocomplete='email']", "input[autocomplete='username']",
-            "input[placeholder*='email' i]",
-        ]:
+        for sel in ["input[type='email']", "input[name='identifier']",
+                    "input[autocomplete='email']", "input[autocomplete='username']",
+                    "input[placeholder*='email' i]"]:
             try:
                 loc = page.locator(sel).first
-                if await loc.is_visible(timeout=500):
+                if await loc.is_visible(timeout=300):
                     email_input = loc
+                    print(f"  Email trovata! sel={sel}")
                     break
             except Exception:
                 pass
         if email_input:
             break
-        if attempt == 5:
-            await screenshot(page, "02b_wait_email")
+        if attempt == 7:
+            info2 = await get_page_info(page)
+            results["_page_info_2"] = info2
+            await screenshot(page, "02b_mid_wait")
+            print(f"  Dopo 14s — buttons: {info2['buttons'][:8]}, inputs: {info2['inputs'][:4]}")
 
     if not email_input:
-        info = await get_page_info(page)
-        raise RuntimeError(f"Email non trovata dopo 24s. Inputs={info['inputs'][:6]}")
+        info3 = await get_page_info(page)
+        results["_page_info_final"] = info3
+        raise RuntimeError(f"Email non trovata dopo 30s. Inputs={info3['inputs'][:6]}")
 
     print("  Inserisco email...")
     await email_input.click()
