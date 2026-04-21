@@ -128,16 +128,15 @@ async def debug_page(page, label):
 
 
 async def login(page):
-    print("[Login] Apro platform.higgsfield.ai ...")
+    print("[Login] Apro higgsfield.ai/ai/video ...")
 
     # Prima prova URL di login diretto
     for login_url in [
-        "https://higgsfield.ai",
+        "https://higgsfield.ai/ai/video",
         "https://higgsfield.ai/login",
         "https://higgsfield.ai/signin",
         "https://higgsfield.ai/auth/signin",
-        "https://studio.higgsfield.ai",
-        "https://studio.higgsfield.ai/login",
+        "https://higgsfield.ai",
     ]:
         try:
             await page.goto(login_url, timeout=20000)
@@ -234,15 +233,14 @@ async def login(page):
 
 
 async def navigate_to_kling(page):
-    """Naviga alla sezione Kling text-to-video."""
+    """Naviga alla sezione video generation."""
     await ss(page, "05_dashboard")
 
     # Prova URL diretti comuni
     for url in [
-        "https://platform.higgsfield.ai/create",
-        "https://platform.higgsfield.ai/generate",
-        "https://platform.higgsfield.ai/studio",
-        "https://platform.higgsfield.ai/video",
+        "https://higgsfield.ai/ai/video",
+        "https://higgsfield.ai/create",
+        "https://higgsfield.ai/studio",
     ]:
         await page.goto(url, timeout=15000)
         await page.wait_for_load_state("networkidle", timeout=10000)

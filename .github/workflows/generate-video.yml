@@ -32,6 +32,14 @@ jobs:
           pip install playwright httpx
           playwright install chromium --with-deps
 
+      - name: Network diagnostics
+        run: |
+          echo "=== DNS check ==="
+          nslookup higgsfield.ai || true
+          echo "=== Curl check ==="
+          curl -s -o /dev/null -w "higgsfield.ai: %{http_code}\n" https://higgsfield.ai --max-time 10 || true
+          curl -s -o /dev/null -w "higgsfield.ai/ai/video: %{http_code}\n" https://higgsfield.ai/ai/video --max-time 10 || true
+
       - name: Generate videos via browser automation
         env:
           HF_EMAIL: "BOBYZ6536@gmail.com"
