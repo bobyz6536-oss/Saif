@@ -1,6 +1,8 @@
 {
   "_login": {
     "status": "error",
-    "error": "Campo email non trovato su nessun URL di login"
+    "error": "Campo email non trovato su nessun URL di login",
+    "url": "https://platform.higgsfield.ai/",
+    "html_excerpt": "<html><head><meta name=\"color-scheme\" content=\"light dark\"><meta charset=\"utf-8\"></head><body><pre>{\"detail\":\"Method Not Allowed\"}</pre><div class=\"json-formatter-container\"></div></body></html>"
   }
 }
