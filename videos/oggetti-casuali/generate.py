@@ -129,7 +129,7 @@ def generate_video(scene: dict) -> str:
         KLING_T2V,
         arguments={
             "prompt": scene["prompt"],
-            "duration": "5",
+            "duration": 5,
             "aspect_ratio": "9:16",
             "cfg_scale": 0.5,
         },
