@@ -166,33 +166,25 @@ async def do_login(page):
     await asyncio.sleep(5)
     await screenshot(page, "02_dopo_login_click")
 
-    # Poll per email input (max 30s)
-    email_input = None
-    for attempt in range(15):
-        await asyncio.sleep(2)
-        for sel in ["input[type='email']", "input[name='identifier']",
-                    "input[autocomplete='email']", "input[autocomplete='username']",
-                    "input[placeholder*='email' i]"]:
-            try:
-                loc = page.locator(sel).first
-                if await loc.is_visible(timeout=300):
-                    email_input = loc
-                    print(f"  Email trovata! sel={sel}")
-                    break
-            except Exception:
-                pass
-        if email_input:
-            break
-        if attempt == 7:
-            info2 = await get_page_info(page)
-            results["_page_info_2"] = info2
-            await screenshot(page, "02b_mid_wait")
-            print(f"  Dopo 14s — buttons: {info2['buttons'][:8]}, inputs: {info2['inputs'][:4]}")
+    # Il modal si apre con opzioni social — clicca "Continue with Email"
+    email_btn = await find_visible(page, [
+        "button:has-text('Continue with Email')",
+        "button:has-text('Email')",
+    ], timeout=15000)
+    if not email_btn:
+        raise RuntimeError("Pulsante 'Continue with Email' non trovato nel modal")
+    await email_btn.click()
+    print("  'Continue with Email' cliccato")
+    await asyncio.sleep(2)
+    await screenshot(page, "03_email_form")
 
+    # Ora appare il campo email
+    email_input = await find_visible(page, [
+        "input[type='email']", "input[name='identifier']",
+        "input[autocomplete='email']", "input[placeholder*='email' i]",
+    ], timeout=8000)
     if not email_input:
-        info3 = await get_page_info(page)
-        results["_page_info_final"] = info3
-        raise RuntimeError(f"Email non trovata dopo 30s. Inputs={info3['inputs'][:6]}")
+        raise RuntimeError("Campo email non trovato dopo 'Continue with Email'")
 
     print("  Inserisco email...")
     await email_input.click()
