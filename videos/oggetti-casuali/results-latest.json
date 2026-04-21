@@ -1,6 +1,470 @@
 {
+  "_page_info": {
+    "url": "https://higgsfield.ai/ai/video",
+    "title": "Create AI Videos from Text & Image | Higgsfield",
+    "body_text": "Explore\nImage\nVideo\nAudio\nCollab\nEdit\nCharacter\nMarketing Studio\nNew\nCinema Studio\n3.5\nOriginals\nNew\nApps\nAssist\nCommunity\nPricing\n30% OFF\nLogin\nSign up\nCreate Video\nEdit Video\nMotion Control\n\nGENERAL\n\nKling 3.0\n\nChange\n\nOptional\n\nStart frame\n\nOptional\n\nEnd frame\n\nMulti-shot\nDescribe your video, like \"A woman walking through a neon-lit city\". Add elements using @\nEnhance on\nOn\nElements\nModel\n\nKling 3.0\n\nUNLIMITED\n\n30% OFF\n\nSEEDANCE 2.0 & 2.0 FAST IS AVAILABLE\n\nWorld's best video model available at 30% OFF with special offer\n\nTry it now\n5s\n16:9\n16:9\n9:16\n1:1\n720p\n720p\n1080p\nGenerate\n10\nHistory\nHow it works\nMAKE VIDEOS IN ONE CLICK\n\n250+ presets for camera control, framing, and high-quality VFX - or use the general preset for manual control.\n\nADD IMAGE\n\nUpload or generate an image to start y",
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community",
+      "Mix",
+      "Change",
+      "Elements",
+      "Model\n\nKling 3.0",
+      "Try it now",
+      "5s",
+      "16:9",
+      "720p",
+      "Generate\n10",
+      "History",
+      "How it works"
+    ],
+    "links": [
+      {
+        "text": "",
+        "href": "/"
+      },
+      {
+        "text": "Explore",
+        "href": "/"
+      },
+      {
+        "text": "Collab",
+        "href": "/generate"
+      },
+      {
+        "text": "Marketing Studio\nNew",
+        "href": "/marketing-studio/product"
+      },
+      {
+        "text": "Cinema Studio\n3.5",
+        "href": "/cinema-studio?autoSelectFolder=true"
+      },
+      {
+        "text": "Originals\nNew",
+        "href": "/original-series"
+      },
+      {
+        "text": "Apps",
+        "href": "/apps"
+      },
+      {
+        "text": "Assist",
+        "href": "/chat"
+      },
+      {
+        "text": "Pricing\n30% OFF",
+        "href": "/pricing"
+      },
+      {
+        "text": "",
+        "href": "https://www.instagram.com/higgsfield.ai"
+      },
+      {
+        "text": "Pricing",
+        "href": "/pricing"
+      },
+      {
+        "text": "Try Free",
+        "href": "#"
+      },
+      {
+        "text": "Login",
+        "href": "#"
+      },
+      {
+        "text": "Sign up",
+        "href": "#"
+      },
+      {
+        "text": "Press",
+        "href": "mailto:press@higgsfield.ai"
+      },
+      {
+        "text": "Creative Challenge",
+        "href": "/creative-challenge"
+      },
+      {
+        "text": "Privacy",
+        "href": "/privacy-policy"
+      },
+      {
+        "text": "Terms",
+        "href": "/terms-of-use-agreement"
+      },
+      {
+        "text": "Cookie Notice",
+        "href": "/cookie-notice"
+      },
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Community",
+        "href": "/project/submit"
+      },
+      {
+        "text": "Library",
+        "href": "/library/image"
+      },
+      {
+        "text": "Profile",
+        "href": "/profile"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      }
+    ]
+  },
+  "_page_info_2": {
+    "url": "https://higgsfield.ai/ai/video",
+    "title": "Create AI Videos from Text & Image | Higgsfield",
+    "body_text": "Explore\nImage\nVideo\nAudio\nCollab\nEdit\nCharacter\nMarketing Studio\nNew\nCinema Studio\n3.5\nOriginals\nNew\nApps\nAssist\nCommunity\nPricing\n30% OFF\nLogin\nSign up\nCreate Video\nEdit Video\nMotion Control\n\nGENERAL\n\nKling 3.0\n\nChange\n\nOptional\n\nStart frame\n\nOptional\n\nEnd frame\n\nMulti-shot\nDescribe your video, like \"A woman walking through a neon-lit city\". Add elements using @\nEnhance on\nOn\nElements\nModel\n\nKling 3.0\n\n5s\n16:9\n16:9\n9:16\n1:1\n720p\n720p\n1080p\nGenerate\n10\nHistory\nHow it works\nMAKE VIDEOS IN ONE CLICK\n\n250+ presets for camera control, framing, and high-quality VFX - or use the general preset for manual control.\n\nADD IMAGE\n\nUpload or generate an image to start your animation\n\nCHOOSE PRESET\n\nPick a preset to control your image movement\n\nGET VIDEO\n\nClick generate to create your final animated vid",
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community",
+      "Mix",
+      "Change",
+      "Elements",
+      "Model\n\nKling 3.0",
+      "5s",
+      "16:9",
+      "720p",
+      "Generate\n10",
+      "History",
+      "How it works",
+      "Continue with Google",
+      "Continue with Apple",
+      "Continue with Microsoft",
+      "Continue with Email",
+      "Business and Enterprise",
+      "Nano Banana Pro",
+      "Kling 3.0",
+      "Higgsfield Soul",
+      "Cinematic App"
+    ],
+    "links": [
+      {
+        "text": "",
+        "href": "/"
+      },
+      {
+        "text": "Explore",
+        "href": "/"
+      },
+      {
+        "text": "Collab",
+        "href": "/generate"
+      },
+      {
+        "text": "Marketing Studio\nNew",
+        "href": "/marketing-studio/product"
+      },
+      {
+        "text": "Cinema Studio\n3.5",
+        "href": "/cinema-studio?autoSelectFolder=true"
+      },
+      {
+        "text": "Originals\nNew",
+        "href": "/original-series"
+      },
+      {
+        "text": "Apps",
+        "href": "/apps"
+      },
+      {
+        "text": "Assist",
+        "href": "/chat"
+      },
+      {
+        "text": "Pricing\n30% OFF",
+        "href": "/pricing"
+      },
+      {
+        "text": "",
+        "href": "https://www.instagram.com/higgsfield.ai"
+      },
+      {
+        "text": "Pricing",
+        "href": "/pricing"
+      },
+      {
+        "text": "Try Free",
+        "href": "#"
+      },
+      {
+        "text": "Login",
+        "href": "#"
+      },
+      {
+        "text": "Sign up",
+        "href": "#"
+      },
+      {
+        "text": "Press",
+        "href": "mailto:press@higgsfield.ai"
+      },
+      {
+        "text": "Creative Challenge",
+        "href": "/creative-challenge"
+      },
+      {
+        "text": "Privacy",
+        "href": "/privacy-policy"
+      },
+      {
+        "text": "Terms",
+        "href": "/terms-of-use-agreement"
+      },
+      {
+        "text": "Cookie Notice",
+        "href": "/cookie-notice"
+      },
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Community",
+        "href": "/project/submit"
+      },
+      {
+        "text": "Library",
+        "href": "/library/image"
+      },
+      {
+        "text": "Profile",
+        "href": "/profile"
+      },
+      {
+        "text": "Privacy Policy",
+        "href": "/privacy-policy"
+      },
+      {
+        "text": "Terms of Use",
+        "href": "/terms-of-use-agreement"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      }
+    ]
+  },
+  "_page_info_final": {
+    "url": "https://higgsfield.ai/ai/video",
+    "title": "Create AI Videos from Text & Image | Higgsfield",
+    "body_text": "Explore\nImage\nVideo\nAudio\nCollab\nEdit\nCharacter\nMarketing Studio\nNew\nCinema Studio\n3.5\nOriginals\nNew\nApps\nAssist\nCommunity\nPricing\n30% OFF\nLogin\nSign up\nCreate Video\nEdit Video\nMotion Control\n\nGENERAL\n\nKling 3.0\n\nChange\n\nOptional\n\nStart frame\n\nOptional\n\nEnd frame\n\nMulti-shot\nDescribe your video, like \"A woman walking through a neon-lit city\". Add elements using @\nEnhance on\nOn\nElements\nModel\n\nKling 3.0\n\n5s\n16:9\n16:9\n9:16\n1:1\n720p\n720p\n1080p\nGenerate\n10\nHistory\nHow it works\nMAKE VIDEOS IN ONE CLICK\n\n250+ presets for camera control, framing, and high-quality VFX - or use the general preset for manual control.\n\nADD IMAGE\n\nUpload or generate an image to start your animation\n\nCHOOSE PRESET\n\nPick a preset to control your image movement\n\nGET VIDEO\n\nClick generate to create your final animated vid",
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community",
+      "Mix",
+      "Change",
+      "Elements",
+      "Model\n\nKling 3.0",
+      "5s",
+      "16:9",
+      "720p",
+      "Generate\n10",
+      "History",
+      "How it works",
+      "Continue with Google",
+      "Continue with Apple",
+      "Continue with Microsoft",
+      "Continue with Email",
+      "Business and Enterprise",
+      "Nano Banana Pro",
+      "Kling 3.0",
+      "Higgsfield Soul",
+      "Cinematic App"
+    ],
+    "links": [
+      {
+        "text": "",
+        "href": "/"
+      },
+      {
+        "text": "Explore",
+        "href": "/"
+      },
+      {
+        "text": "Collab",
+        "href": "/generate"
+      },
+      {
+        "text": "Marketing Studio\nNew",
+        "href": "/marketing-studio/product"
+      },
+      {
+        "text": "Cinema Studio\n3.5",
+        "href": "/cinema-studio?autoSelectFolder=true"
+      },
+      {
+        "text": "Originals\nNew",
+        "href": "/original-series"
+      },
+      {
+        "text": "Apps",
+        "href": "/apps"
+      },
+      {
+        "text": "Assist",
+        "href": "/chat"
+      },
+      {
+        "text": "Pricing\n30% OFF",
+        "href": "/pricing"
+      },
+      {
+        "text": "",
+        "href": "https://www.instagram.com/higgsfield.ai"
+      },
+      {
+        "text": "Pricing",
+        "href": "/pricing"
+      },
+      {
+        "text": "Try Free",
+        "href": "#"
+      },
+      {
+        "text": "Login",
+        "href": "#"
+      },
+      {
+        "text": "Sign up",
+        "href": "#"
+      },
+      {
+        "text": "Press",
+        "href": "mailto:press@higgsfield.ai"
+      },
+      {
+        "text": "Creative Challenge",
+        "href": "/creative-challenge"
+      },
+      {
+        "text": "Privacy",
+        "href": "/privacy-policy"
+      },
+      {
+        "text": "Terms",
+        "href": "/terms-of-use-agreement"
+      },
+      {
+        "text": "Cookie Notice",
+        "href": "/cookie-notice"
+      },
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Community",
+        "href": "/project/submit"
+      },
+      {
+        "text": "Library",
+        "href": "/library/image"
+      },
+      {
+        "text": "Profile",
+        "href": "/profile"
+      },
+      {
+        "text": "Privacy Policy",
+        "href": "/privacy-policy"
+      },
+      {
+        "text": "Terms of Use",
+        "href": "/terms-of-use-agreement"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      }
+    ]
+  },
   "_login": {
     "status": "error",
-    "error": "Email non trovata dopo 24s. Inputs=[{'type': 'file', 'name': '', 'placeholder': '', 'id': ''}, {'type': 'file', 'name': '', 'placeholder': '', 'id': ''}, {'type': 'checkbox', 'name': 'enhancePrompt', 'placeholder': '', 'id': ''}, {'type': 'checkbox', 'name': 'enhancePrompt', 'placeholder': '', 'id': ''}]"
+    "error": "Email non trovata dopo 30s. Inputs=[{'type': 'file', 'name': '', 'placeholder': '', 'id': ''}, {'type': 'file', 'name': '', 'placeholder': '', 'id': ''}, {'type': 'checkbox', 'name': 'enhancePrompt', 'placeholder': '', 'id': ''}, {'type': 'checkbox', 'name': 'enhancePrompt', 'placeholder': '', 'id': ''}]"
   }
 }
