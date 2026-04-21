@@ -100,6 +100,10 @@
         "href": "/cookie-notice"
       },
       {
+        "text": "Cookie Settings",
+        "href": "#cookie-settings"
+      },
+      {
         "text": "Home",
         "href": "/"
       },
@@ -114,6 +118,26 @@
       {
         "text": "Profile",
         "href": "/profile"
+      },
+      {
+        "text": "Cookie Policy",
+        "href": "https://higgsfield.ai/cookie-notice"
+      },
+      {
+        "text": "Your Privacy Choices",
+        "href": "https://higgsfield.ai/privacy-policy"
+      },
+      {
+        "text": "Privacy Policy",
+        "href": "https://higgsfield.ai/privacy-policy"
+      },
+      {
+        "text": "Terms of Use",
+        "href": "https://higgsfield.ai/terms-of-use-agreement"
+      },
+      {
+        "text": "Cookie Policy",
+        "href": "https://higgsfield.ai/cookie-notice"
       }
     ],
     "inputs": [
@@ -140,11 +164,35 @@
         "name": "enhancePrompt",
         "placeholder": "",
         "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_strict"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_performance"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_targeting"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_functionality"
       }
     ]
   },
   "_login": {
     "status": "error",
-    "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"button[type='submit']\").first\n    - locator resolved to <button data-rac=\"\" tabindex=\"0\" type=\"submit\" id=\"react-aria1382548404-_r_17_\" class=\"gap-2 transition-transform duration-200 data-[pressed]:scale-[0.97] border max-w-full inline-grid grid-flow-col text-ellipsis overflow-hidden whitespace-nowrap justify-center items-center content-center font-medium transition [&>svg]:h-full focus-visible:ring-2 [.button--pill]:rounded-full h-12 gap-2 text-body-s not-[.button--pill]:rounded-xl not-[.button--fixed]:px-4 [.button--fixed]:w-12 [&>svg]:size-5 focus-visib\u2026>\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"flex-1 flex flex-col items-center px-5 py-6 md:px-[88px] md:py-8 xl:py-8 overflow-y-auto hide-scrollbar\">\u2026</div> from <div role=\"dialog\" tabindex=\"-1\" id=\"radix-_r_2i_\" data-state=\"open\" aria-labelledby=\"radix-_r_2j_\" aria-describedby=\"radix-_r_2k_\" class=\"fixed z-[3002] inset-0 m-auto w-[calc(100%-24px)] max-w-[352px] h-[620px] max-h-[calc(100dvh-24px)] md:w-[560px] md:max-w-[calc(100vw-48px)] md:h-[700px] md:max-h-[calc(100dvh-48px)] xl:w-[1120px] xl:max-w-[calc(100vw-64px)] xl:h-[min(720px,calc(100dvh-64px))] bg-page-primary rounded-[20px] md:rounded-[24px] border border-separator-card shadow-[inset_0px_0px_32p\u2026>\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"flex-1 flex flex-col items-center px-5 py-6 md:px-[88px] md:py-8 xl:py-8 overflow-y-auto hide-scrollbar\">\u2026</div> from <div role=\"dialog\" tabindex=\"-1\" id=\"radix-_r_2i_\" data-state=\"open\" aria-labelledby=\"radix-_r_2j_\" aria-describedby=\"radix-_r_2k_\" class=\"fixed z-[3002] inset-0 m-auto w-[calc(100%-24px)] max-w-[352px] h-[620px] max-h-[calc(100dvh-24px)] md:w-[560px] md:max-w-[calc(100vw-48px)] md:h-[700px] md:max-h-[calc(100dvh-48px)] xl:w-[1120px] xl:max-w-[calc(100vw-64px)] xl:h-[min(720px,calc(100dvh-64px))] bg-page-primary rounded-[20px] md:rounded-[24px] border border-separator-card shadow-[inset_0px_0px_32p\u2026>\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    53 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"flex-1 flex flex-col items-center px-5 py-6 md:px-[88px] md:py-8 xl:py-8 overflow-y-auto hide-scrollbar\">\u2026</div> from <div role=\"dialog\" tabindex=\"-1\" id=\"radix-_r_2i_\" data-state=\"open\" aria-labelledby=\"radix-_r_2j_\" aria-describedby=\"radix-_r_2k_\" class=\"fixed z-[3002] inset-0 m-auto w-[calc(100%-24px)] max-w-[352px] h-[620px] max-h-[calc(100dvh-24px)] md:w-[560px] md:max-w-[calc(100vw-48px)] md:h-[700px] md:max-h-[calc(100dvh-48px)] xl:w-[1120px] xl:max-w-[calc(100vw-64px)] xl:h-[min(720px,calc(100dvh-64px))] bg-page-primary rounded-[20px] md:rounded-[24px] border border-separator-card shadow-[inset_0px_0px_32p\u2026>\u2026</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n"
+    "error": "Email input non trovato nel dialog"
   }
 }
