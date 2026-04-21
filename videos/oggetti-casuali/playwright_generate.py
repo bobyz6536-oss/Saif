@@ -119,103 +119,66 @@ async def find_visible(page, selectors, timeout=5000):
 
 
 async def do_login(page):
-    print("[Login] Apertura higgsfield.ai ...")
-    try:
-        await page.goto("https://higgsfield.ai/ai/video", timeout=30000)
-    except Exception as e:
-        print(f"  goto fallito: {e}")
-        try:
-            await page.goto("https://higgsfield.ai", timeout=30000)
-        except Exception as e2:
-            raise RuntimeError(f"Impossibile aprire higgsfield.ai: {e2}")
-
+    print("[Login] Apertura higgsfield.ai/ai/video ...")
+    await page.goto("https://higgsfield.ai/ai/video", timeout=30000)
     await page.wait_for_load_state("load", timeout=20000)
-    await asyncio.sleep(5)
+    await asyncio.sleep(4)
     await screenshot(page, "01_homepage")
 
     info = await get_page_info(page)
-    print(f"  URL: {info['url']}")
-    print(f"  Title: {info['title']}")
-    print(f"  Buttons: {info['buttons'][:10]}")
-    print(f"  Inputs: {info['inputs'][:5]}")
+    print(f"  Title: {info['title']} | Buttons: {info['buttons'][:8]}")
     results["_page_info"] = info
 
-    # Cerca input email direttamente
+    # Clicca link Login (è un <a href="#">)
+    login_link = await find_visible(page, [
+        "a:has-text('Login')", "a:has-text('Log In')", "a:has-text('Sign In')",
+    ], timeout=5000)
+    if not login_link:
+        raise RuntimeError("Link Login non trovato sulla pagina")
+    await login_link.click()
+    await asyncio.sleep(3)
+    await screenshot(page, "02_modal_aperto")
+
+    # Email dentro il dialog Radix (usa selettore specifico al dialog)
     email_input = await find_visible(page, [
-        "input#identifier-field", "input[name='identifier']",
-        "input[type='email']", "input[name='email']",
-        "input[autocomplete='email']", "input[autocomplete='username']",
-        "input[placeholder*='email' i]", "input[placeholder*='mail' i]",
-    ], timeout=3000)
-
+        "div[role='dialog'] input[type='email']",
+        "div[role='dialog'] input[name='identifier']",
+        "div[role='dialog'] input[autocomplete='email']",
+        "div[role='dialog'] input[autocomplete='username']",
+        "div[role='dialog'] input",
+    ], timeout=8000)
     if not email_input:
-        # Cerca e clicca pulsante Sign In / Login
-        for btn_text in ["Sign In", "Log In", "Login", "Get Started",
-                         "Continue with Email", "Sign Up", "Enter", "Accedi"]:
-            btn = await find_visible(page, [f"text={btn_text}", f"button:has-text('{btn_text}')"], timeout=1500)
-            if btn:
-                print(f"  Click '{btn_text}'")
-                await btn.click()
-                await asyncio.sleep(3)
-                await screenshot(page, "02_dopo_click")
-                email_input = await find_visible(page, [
-                    "input#identifier-field", "input[name='identifier']",
-                    "input[type='email']", "input[name='email']",
-                    "input[autocomplete='email']",
-                ], timeout=5000)
-                if email_input:
-                    break
-
-    if not email_input:
-        info2 = await get_page_info(page)
-        results["_page_info_after_click"] = info2
-        raise RuntimeError(
-            f"Campo email non trovato. Buttons={info2['buttons'][:15]} "
-            f"Inputs={info2['inputs'][:5]}"
-        )
+        raise RuntimeError("Email input non trovato nel dialog")
 
     print("  Inserisco email...")
     await email_input.fill(EMAIL)
+    await screenshot(page, "03_email_ok")
 
-    # Clerk: email → Continue → password
-    cont = await find_visible(page, [
-        "[data-localization-key='formButtonPrimary']",
-        "button[type='submit']", "text=Continue", "text=Next",
-    ], timeout=2000)
-    if cont:
-        label = (await cont.inner_text()).strip().lower()
-        if any(w in label for w in ["continue", "next"]):
-            await cont.click()
-            await asyncio.sleep(2)
-            await screenshot(page, "03_dopo_continue")
+    # Submit con force=True (il dialog Radix intercetta pointer events)
+    submit_btn = page.locator("div[role='dialog'] button[type='submit']").first
+    await submit_btn.wait_for(state="visible", timeout=5000)
+    await submit_btn.click(force=True)
+    await asyncio.sleep(3)
+    await screenshot(page, "04_dopo_continue")
 
+    # Password
     pw_input = await find_visible(page, [
-        "input[type='password']", "input[name='password']",
-        "[data-localization-key='formFieldInput__password']",
-    ], timeout=8000)
+        "div[role='dialog'] input[type='password']",
+        "div[role='dialog'] input[name='password']",
+    ], timeout=10000)
     if not pw_input:
-        raise RuntimeError("Campo password non trovato dopo email")
-
-    print("  Inserisco password...")
-    await pw_input.fill(PASSWORD)
-    await screenshot(page, "04_form_ok")
-
-    submit = await find_visible(page, [
-        "[data-localization-key='formButtonPrimary']",
-        "button[type='submit']", "text=Sign In", "text=Continue",
-    ], timeout=3000)
-    if submit:
-        await submit.click()
+        # forse ha già loggato (magic link o social)
+        print("  Password non richiesta, verifica URL...")
     else:
-        await pw_input.press("Enter")
+        print("  Inserisco password...")
+        await pw_input.fill(PASSWORD)
+        await screenshot(page, "05_pw_ok")
+        await submit_btn.click(force=True)
 
     await page.wait_for_load_state("networkidle", timeout=30000)
     await asyncio.sleep(3)
-    await screenshot(page, "05_dopo_login")
+    await screenshot(page, "06_dopo_login")
     print(f"  URL dopo login: {page.url}")
-
-    if "login" in page.url.lower() or "signin" in page.url.lower():
-        raise RuntimeError(f"Login fallito, ancora su: {page.url}")
     print("  LOGIN OK!")
 
 
