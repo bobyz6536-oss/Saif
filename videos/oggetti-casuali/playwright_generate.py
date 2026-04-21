@@ -477,4 +477,17 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except Exception as e:
+        print(f"ERRORE FATALE: {e}")
+        import traceback
+        traceback.print_exc()
+        # Assicura sempre un results.json valido
+        import json
+        from pathlib import Path
+        out = Path(__file__).parent / "output" / "results.json"
+        out.parent.mkdir(exist_ok=True)
+        with open(out, "w") as f:
+            json.dump({"_fatal": {"status": "error", "error": str(e)}}, f, indent=2)
+        raise  # Re-raise per far fallire il workflow con info visibili
