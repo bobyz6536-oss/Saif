@@ -125,44 +125,53 @@ async def do_login(page):
     await asyncio.sleep(4)
     await screenshot(page, "01_homepage")
 
-    # Accetta cookie banner se presente
-    for sel in ["text=Accept All", "text=Accept all", "text=Accept",
-                "text=Accetta", "button:has-text('Accept')"]:
-        try:
-            btn = page.locator(sel).first
-            if await btn.is_visible(timeout=2000):
-                await btn.click()
-                await asyncio.sleep(1)
-                print("  Cookie banner accettato")
-                break
-        except Exception:
-            pass
+    # Chiudi cookie banner via JS (più affidabile di click)
+    await page.evaluate("""
+        () => {
+            const btns = [...document.querySelectorAll('button')];
+            const accept = btns.find(b => /accept/i.test(b.textContent));
+            if (accept) accept.click();
+        }
+    """)
+    await asyncio.sleep(1)
 
-    # Clicca link Login
-    login_link = await find_visible(page, [
-        "a:has-text('Login')", "a:has-text('Log In')", "a:has-text('Sign In')",
-    ], timeout=5000)
-    if not login_link:
-        raise RuntimeError("Link Login non trovato")
-    await login_link.click()
-    print("  Login cliccato, attendo modal...")
-    await asyncio.sleep(4)
+    # Clicca Login via JS (bypassa overlay)
+    clicked = await page.evaluate("""
+        () => {
+            const links = [...document.querySelectorAll('a')];
+            const login = links.find(a => /^login$/i.test(a.textContent.trim()));
+            if (login) { login.click(); return true; }
+            return false;
+        }
+    """)
+    print(f"  Login JS click: {clicked}")
+    await asyncio.sleep(5)
     await screenshot(page, "02_modal")
 
-    # Cerca email — senza prefisso dialog (il form potrebbe essere in un layer diverso)
-    email_input = await find_visible(page, [
-        "input[type='email']",
-        "input[name='identifier']",
-        "input[autocomplete='email']",
-        "input[autocomplete='username']",
-        "input[placeholder*='email' i]",
-        "input[placeholder*='mail' i]",
-        "div[role='dialog'] input",
-        "input",
-    ], timeout=10000)
+    # Attendi input email (Clerk modal carica in modo asincrono)
+    email_input = None
+    for attempt in range(12):  # max 24s
+        await asyncio.sleep(2)
+        for sel in [
+            "input[type='email']", "input[name='identifier']",
+            "input[autocomplete='email']", "input[autocomplete='username']",
+            "input[placeholder*='email' i]",
+        ]:
+            try:
+                loc = page.locator(sel).first
+                if await loc.is_visible(timeout=500):
+                    email_input = loc
+                    break
+            except Exception:
+                pass
+        if email_input:
+            break
+        if attempt == 5:
+            await screenshot(page, "02b_wait_email")
+
     if not email_input:
         info = await get_page_info(page)
-        raise RuntimeError(f"Email non trovata. Inputs: {info['inputs']}")
+        raise RuntimeError(f"Email non trovata dopo 24s. Inputs={info['inputs'][:6]}")
 
     print("  Inserisco email...")
     await email_input.click()
