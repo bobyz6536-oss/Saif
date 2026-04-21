@@ -41,13 +41,14 @@ jobs:
           curl -s -o /dev/null -w "higgsfield.ai/ai/video: %{http_code}\n" https://higgsfield.ai/ai/video --max-time 10 || true
 
       - name: Generate videos via browser automation
+        continue-on-error: true
         env:
           HF_EMAIL: "BOBYZ6536@gmail.com"
           HF_PASSWORD: "Saifahmed12345@"
         run: |
           mkdir -p videos/oggetti-casuali/output/debug
           cd videos/oggetti-casuali
-          python playwright_generate.py
+          python playwright_generate.py || true
 
       - name: Commit results back to repo
         if: always()
