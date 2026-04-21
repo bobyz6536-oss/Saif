@@ -173,7 +173,7 @@ async def do_login(page):
     ], timeout=15000)
     if not email_btn:
         raise RuntimeError("Pulsante 'Continue with Email' non trovato nel modal")
-    await email_btn.click()
+    await email_btn.click(force=True)  # force bypassa overlay Radix
     print("  'Continue with Email' cliccato")
     await asyncio.sleep(2)
     await screenshot(page, "03_email_form")
