@@ -158,75 +158,34 @@ SCENES = [
 
 
 def generate_image(scene: dict) -> str:
-    """Genera immagine con Nanobanana API. Restituisce path file."""
-    print(f"  [Nanobanana] Genero immagine...")
+    """Genera immagine con Seedream v4 (Higgsfield). Restituisce path file."""
+    print(f"  [Seedream] Genero immagine...")
 
-    # Prova endpoint Nanobanana in ordine
-    endpoints = [
-        ("https://nanobananaapi.ai/api/v1/images/generate", "json"),
-        ("https://gateway.bananapro.site/api/v1/images/generate", "json"),
-        ("https://api.nanobanana.ai/v1/images/generations", "openai"),
-        ("https://nanobananaapi.ai/v1/images/generations", "openai"),
-    ]
+    result = hf.subscribe(
+        "bytedance/seedream/v4/text-to-image",
+        arguments={
+            "prompt": scene["image_prompt"],
+            "aspect_ratio": "9:16",
+            "resolution": "2K",
+        },
+    )
 
-    last_err = None
-    for url, fmt in endpoints:
-        try:
-            if fmt == "openai":
-                payload = {
-                    "model": "nano-banana-2",
-                    "prompt": scene["image_prompt"],
-                    "n": 1,
-                    "size": "1024x1792",
-                    "response_format": "b64_json",
-                }
-            else:
-                payload = {
-                    "prompt": scene["image_prompt"],
-                    "aspect_ratio": "9:16",
-                    "model": "nano-banana-2",
-                }
+    img_url = (
+        result.get("url") or
+        result.get("image_url") or
+        (result.get("images") or [{}])[0].get("url")
+    )
+    if not img_url:
+        raise RuntimeError(f"Nessuna immagine: {result}")
 
-            resp = httpx.post(
-                url,
-                headers={
-                    "Authorization": f"Bearer {NB_API_KEY}",
-                    "Content-Type": "application/json",
-                },
-                json=payload,
-                timeout=120,
-            )
-            resp.raise_for_status()
-            data = resp.json()
-
-            # Estrai immagine base64
-            img_bytes = None
-            if "data" in data and data["data"]:
-                b64 = data["data"][0].get("b64_json") or data["data"][0].get("b64")
-                if b64:
-                    img_bytes = base64.b64decode(b64)
-                url_img = data["data"][0].get("url")
-                if url_img and not img_bytes:
-                    img_bytes = httpx.get(url_img, timeout=60).content
-            elif "image" in data:
-                img_bytes = base64.b64decode(data["image"])
-            elif "url" in data:
-                img_bytes = httpx.get(data["url"], timeout=60).content
-
-            if not img_bytes:
-                raise RuntimeError(f"Nessuna immagine: {str(data)[:200]}")
-
-            img_path = os.path.join(OUTPUT_DIR, f"{scene['id']}.jpg")
-            with open(img_path, "wb") as f:
-                f.write(img_bytes)
-            print(f"  Immagine: {img_path} via {url}")
-            return img_path
-
-        except Exception as e:
-            print(f"  {url}: {e}")
-            last_err = e
-
-    raise RuntimeError(f"Tutti gli endpoint Nanobanana falliti: {last_err}")
+    img_path = os.path.join(OUTPUT_DIR, f"{scene['id']}.jpg")
+    with httpx.stream("GET", img_url, follow_redirects=True, timeout=60) as r:
+        r.raise_for_status()
+        with open(img_path, "wb") as f:
+            for chunk in r.iter_bytes():
+                f.write(chunk)
+    print(f"  Immagine: {img_path}")
+    return img_path
 
 
 def upload_image(img_path: str) -> str:
