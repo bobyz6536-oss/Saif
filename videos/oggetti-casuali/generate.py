@@ -20,7 +20,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-KLING_T2V = "kling-video/v2.6/pro/text-to-video"
+KLING_T2V = "kling-video/v2.6/standard/text-to-video"
 
 CHARACTER = (
     "3D photorealistic transparent human figure, semi-transparent frosted glass body "
