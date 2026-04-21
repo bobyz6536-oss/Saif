@@ -121,7 +121,7 @@ async def debug_page(page, label):
         html = await page.content()
         html_path = str(DBG_DIR / f"{label}.html")
         with open(html_path, "w", encoding="utf-8") as f:
-            f.write(html[:50000])
+            f.write(html[:100000])
         print(f"  [debug] HTML salvato: {html_path}")
     except Exception as e:
         print(f"  [debug] errore: {e}")
@@ -148,36 +148,47 @@ async def login(page):
         await ss(page, f"01_goto_{login_url.split('/')[-1] or 'home'}")
         await debug_page(page, "goto")
 
-        # Cerca campo email direttamente
+        await asyncio.sleep(4)  # aspetta JS / Clerk init
+        await debug_page(page, f"loaded_{login_url.split('/')[-1] or 'root'}")
+
+        # Cerca campo email direttamente (include selettori Clerk)
         email_field = await wait_visible(page, [
+            "input#identifier-field",
+            "input[name='identifier']",
             "input[type='email']",
             "input[name='email']",
             "input[placeholder*='email' i]",
             "input[autocomplete='email']",
             "input[autocomplete='username']",
+            "[data-localization-key='formFieldInput__emailAddress']",
         ], timeout=4000)
 
         if email_field:
             print(f"  Campo email trovato su {login_url}")
             break
 
-        # Cerca pulsante Sign In e cliccalo
+        # Cerca pulsante Sign In / Get Started e cliccalo
         sign_in = await wait_visible(page, [
-            "text=Sign In", "text=Log In", "text=Login", "text=Continue with Email",
-            "a[href*='/login']", "a[href*='/signin']",
+            "text=Sign In", "text=Log In", "text=Login",
+            "text=Get Started", "text=Continue with Email",
+            "text=Sign Up", "text=Enter",
+            "a[href*='/login']", "a[href*='/signin']", "a[href*='/sign-in']",
             "button:has-text('Sign')", "button:has-text('Login')",
-            "button:has-text('Email')",
-        ], timeout=3000)
+            "button:has-text('Get Started')", "button:has-text('Email')",
+        ], timeout=4000)
         if sign_in:
+            txt = await sign_in.inner_text()
+            print(f"  Click '{txt.strip()}'")
             await sign_in.click()
-            await page.wait_for_load_state("domcontentloaded", timeout=10000)
-            await asyncio.sleep(2)
+            await asyncio.sleep(3)
             await ss(page, "02_dopo_signin_click")
             await debug_page(page, "after_click")
             email_field = await wait_visible(page, [
+                "input#identifier-field",
+                "input[name='identifier']",
                 "input[type='email']", "input[name='email']",
                 "input[placeholder*='email' i]", "input[autocomplete='email']",
-            ], timeout=5000)
+            ], timeout=6000)
             if email_field:
                 break
 
@@ -186,22 +197,27 @@ async def login(page):
         raise RuntimeError("Campo email non trovato su nessun URL di login")
 
     await email_field.fill(EMAIL)
+    await ss(page, "03_email_inserita")
 
-    # Alcuni siti usano flusso email-first: inserisci email → Next → poi password
+    # Clerk flusso email-first: email → Continue → password → Continue
     next_btn = await wait_visible(page, [
-        "button[type='submit']", "text=Continue", "text=Next", "text=Avanti"
-    ], timeout=2000)
+        "button[type='submit']",
+        "[data-localization-key='formButtonPrimary']",
+        "text=Continue", "text=Next", "text=Avanti",
+    ], timeout=3000)
     if next_btn:
-        btn_txt = (await next_btn.inner_text()).strip()
-        if "continue" in btn_txt.lower() or "next" in btn_txt.lower() or "avanti" in btn_txt.lower():
+        btn_txt = (await next_btn.inner_text()).strip().lower()
+        if any(w in btn_txt for w in ["continue", "next", "avanti", "sign in", "log in"]):
             await next_btn.click()
             await asyncio.sleep(2)
-            await ss(page, "03_dopo_next")
+            await ss(page, "04_dopo_continue")
 
     # Inserisci password
     pw_field = await wait_visible(page, [
-        "input[type='password']", "input[name='password']",
+        "input[name='password']",
+        "input[type='password']",
         "input[placeholder*='password' i]",
+        "[data-localization-key='formFieldInput__password']",
     ], timeout=8000)
     if pw_field:
         await pw_field.fill(PASSWORD)
@@ -209,12 +225,13 @@ async def login(page):
         await debug_page(page, "no_password")
         raise RuntimeError("Campo password non trovato")
 
-    await ss(page, "04_form_compilato")
+    await ss(page, "05_form_compilato")
 
-    # Submit
+    # Submit finale
     submit = await wait_visible(page, [
+        "[data-localization-key='formButtonPrimary']",
         "button[type='submit']", "text=Sign In", "text=Continue",
-        "text=Log In", "button:has-text('Sign')", "button:has-text('Accedi')",
+        "text=Log In", "button:has-text('Sign')",
     ], timeout=4000)
     if submit:
         await submit.click()
@@ -223,7 +240,7 @@ async def login(page):
 
     await page.wait_for_load_state("networkidle", timeout=30000)
     await asyncio.sleep(3)
-    await ss(page, "05_dopo_login")
+    await ss(page, "06_dopo_login")
     await debug_page(page, "dopo_login")
     print(f"  URL dopo login: {page.url}")
 
@@ -408,7 +425,9 @@ async def main():
             # Salva HTML per debug in results così lo leggo via GitHub API
             try:
                 html = await page.content()
-                html_excerpt = html[:3000]
+                # Salta CSS, prendi solo il body HTML
+                body_start = html.find("<body")
+                html_excerpt = html[body_start:body_start+4000] if body_start > 0 else html[:4000]
             except Exception:
                 html_excerpt = "N/A"
             with open(OUTPUT_DIR / "results.json", "w") as f:
