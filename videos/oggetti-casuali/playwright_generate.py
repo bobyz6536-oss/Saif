@@ -132,14 +132,18 @@ async def login(page):
 
     # Prima prova URL di login diretto
     for login_url in [
+        "https://higgsfield.ai",
         "https://higgsfield.ai/login",
         "https://higgsfield.ai/signin",
-        "https://higgsfield.ai",
-        "https://app.higgsfield.ai/login",
-        "https://app.higgsfield.ai/signin",
-        "https://app.higgsfield.ai",
+        "https://higgsfield.ai/auth/signin",
+        "https://studio.higgsfield.ai",
+        "https://studio.higgsfield.ai/login",
     ]:
-        await page.goto(login_url, timeout=30000)
+        try:
+            await page.goto(login_url, timeout=20000)
+        except Exception as nav_err:
+            print(f"  [{login_url}] navigazione fallita: {nav_err}")
+            continue
         await page.wait_for_load_state("domcontentloaded", timeout=15000)
         await asyncio.sleep(3)  # attendi JS
         await ss(page, f"01_goto_{login_url.split('/')[-1] or 'home'}")
