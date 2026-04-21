@@ -424,12 +424,28 @@ async def main():
             await ss(page, "FATAL_login_error")
             # Salva HTML per debug in results così lo leggo via GitHub API
             try:
-                html = await page.content()
-                # Salta CSS, prendi solo il body HTML
-                body_start = html.find("<body")
-                html_excerpt = html[body_start:body_start+4000] if body_start > 0 else html[:4000]
-            except Exception:
-                html_excerpt = "N/A"
+                body_text = await page.inner_text("body")
+                buttons = await page.locator("button").all()
+                btns = []
+                for b in buttons[:20]:
+                    try:
+                        btns.append((await b.inner_text()).strip())
+                    except Exception:
+                        pass
+                links = await page.locator("a").all()
+                lnks = []
+                for a in links[:20]:
+                    try:
+                        lnks.append({"text": (await a.inner_text()).strip(), "href": await a.get_attribute("href")})
+                    except Exception:
+                        pass
+                html_excerpt = {
+                    "body_text": body_text[:1000],
+                    "buttons": btns,
+                    "links": lnks,
+                }
+            except Exception as ex:
+                html_excerpt = f"errore: {ex}"
             with open(OUTPUT_DIR / "results.json", "w") as f:
                 json.dump({"_login": {"status": "error", "error": str(e),
                                       "url": page.url, "html_excerpt": html_excerpt}}, f, indent=2)
