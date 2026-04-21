@@ -14,7 +14,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
 
     steps:
       - name: Checkout
@@ -28,17 +28,18 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install higgsfield-client httpx Pillow
-
-      - name: Generate video scenes
-        env:
-          HF_API_KEY: 1c3e9ae8-a47e-4c62-8ebf-786868ed46ad
-          HF_API_SECRET: c5d1f864ee91c6390bf39398223718701c8c1d8f10961488e02da58c6eebae0a
-          NB_API_KEY: f5ecea0d5100fb4587b9ff4881ef813f
         run: |
-          mkdir -p videos/oggetti-casuali/output
+          pip install playwright httpx
+          playwright install chromium --with-deps
+
+      - name: Generate videos via browser automation
+        env:
+          HF_EMAIL: "BOBYZ6536@gmail.com"
+          HF_PASSWORD: "Saifahmed12345@"
+        run: |
+          mkdir -p videos/oggetti-casuali/output/debug
           cd videos/oggetti-casuali
-          python generate.py
+          python playwright_generate.py
 
       - name: Commit results back to repo
         run: |
@@ -49,6 +50,14 @@ jobs:
           git diff --cached --quiet || git commit -m "ci: add generation results [skip ci]"
           git push origin HEAD
 
+      - name: Upload debug screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: debug-screenshots
+          path: videos/oggetti-casuali/output/debug/*.png
+          retention-days: 3
+
       - name: Upload generated videos
         uses: actions/upload-artifact@v4
         with:
@@ -58,6 +67,7 @@ jobs:
 
       - name: Upload generation report
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: generation-report
           path: videos/oggetti-casuali/output/results.json
