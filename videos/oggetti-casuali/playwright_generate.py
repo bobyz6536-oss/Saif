@@ -132,10 +132,12 @@ async def login(page):
 
     # Prima prova URL di login diretto
     for login_url in [
-        "https://platform.higgsfield.ai/login",
-        "https://platform.higgsfield.ai/signin",
-        "https://platform.higgsfield.ai/auth/signin",
-        "https://platform.higgsfield.ai",
+        "https://higgsfield.ai/login",
+        "https://higgsfield.ai/signin",
+        "https://higgsfield.ai",
+        "https://app.higgsfield.ai/login",
+        "https://app.higgsfield.ai/signin",
+        "https://app.higgsfield.ai",
     ]:
         await page.goto(login_url, timeout=30000)
         await page.wait_for_load_state("domcontentloaded", timeout=15000)
