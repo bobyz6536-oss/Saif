@@ -18,6 +18,10 @@
       "env": {
         "NANOBANANA_API_KEY": "YOUR_NANOBANANA_API_KEY"
       }
+    },
+    "capcut": {
+      "command": "uvx",
+      "args": ["capcut-ai-editor"]
     }
   }
 }
