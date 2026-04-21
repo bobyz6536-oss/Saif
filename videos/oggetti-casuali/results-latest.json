@@ -1,42 +1,6 @@
 {
-  "01-hook": {
+  "_login": {
     "status": "error",
-    "error": "Model not found"
-  },
-  "02-bicicletta": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "03-materassino": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "04-aquilone": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "05-catapulta": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "06-pallone": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "07-skateboard": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "08-socrate": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "09-aereo": {
-    "status": "error",
-    "error": "Model not found"
-  },
-  "10-finale-cta": {
-    "status": "error",
-    "error": "Model not found"
+    "error": "Campo email non trovato"
   }
 }
