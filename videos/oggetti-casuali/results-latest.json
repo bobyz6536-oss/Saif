@@ -1,6 +1,6 @@
 {
   "_login": {
     "status": "error",
-    "error": "Campo email non trovato"
+    "error": "Campo email non trovato su nessun URL di login"
   }
 }
