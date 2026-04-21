@@ -85,49 +85,116 @@ async def wait_visible(page, selectors, timeout=5000):
     return None
 
 
+async def debug_page(page, label):
+    """Stampa info di debug sulla pagina corrente."""
+    try:
+        title = await page.title()
+        url = page.url
+        inputs = await page.locator("input").all()
+        buttons = await page.locator("button").all()
+        print(f"  [{label}] URL={url} | Title={title}")
+        print(f"  [{label}] Inputs: {len(inputs)} | Buttons: {len(buttons)}")
+        for i, inp in enumerate(inputs[:5]):
+            try:
+                t = await inp.get_attribute("type") or "?"
+                n = await inp.get_attribute("name") or "?"
+                ph = await inp.get_attribute("placeholder") or "?"
+                print(f"    input[{i}] type={t} name={n} placeholder={ph}")
+            except Exception:
+                pass
+        for i, btn in enumerate(buttons[:5]):
+            try:
+                txt = (await btn.inner_text()).strip()[:40]
+                print(f"    button[{i}] text={txt!r}")
+            except Exception:
+                pass
+    except Exception as e:
+        print(f"  [debug] errore: {e}")
+
+
 async def login(page):
     print("[Login] Apro platform.higgsfield.ai ...")
-    await page.goto("https://platform.higgsfield.ai", timeout=30000)
-    await page.wait_for_load_state("networkidle", timeout=20000)
-    await ss(page, "01_homepage")
-    print(f"  URL: {page.url}")
 
-    # Clicca Sign In se presente
-    sign_in = await wait_visible(page, [
-        "text=Sign In", "text=Log In", "text=Login",
-        "a[href*='/login']", "button:has-text('Sign')", "button:has-text('Login')"
-    ], timeout=4000)
-    if sign_in:
-        await sign_in.click()
-        await page.wait_for_load_state("networkidle", timeout=15000)
-        await ss(page, "02_login_page")
+    # Prima prova URL di login diretto
+    for login_url in [
+        "https://platform.higgsfield.ai/login",
+        "https://platform.higgsfield.ai/signin",
+        "https://platform.higgsfield.ai/auth/signin",
+        "https://platform.higgsfield.ai",
+    ]:
+        await page.goto(login_url, timeout=30000)
+        await page.wait_for_load_state("domcontentloaded", timeout=15000)
+        await asyncio.sleep(3)  # attendi JS
+        await ss(page, f"01_goto_{login_url.split('/')[-1] or 'home'}")
+        await debug_page(page, "goto")
 
-    # Inserisci email
-    email_field = await wait_visible(page, [
-        "input[type='email']", "input[name='email']",
-        "input[placeholder*='email' i]", "input[autocomplete='email']"
-    ], timeout=8000)
-    if email_field:
-        await email_field.fill(EMAIL)
-    else:
-        raise RuntimeError("Campo email non trovato")
+        # Cerca campo email direttamente
+        email_field = await wait_visible(page, [
+            "input[type='email']",
+            "input[name='email']",
+            "input[placeholder*='email' i]",
+            "input[autocomplete='email']",
+            "input[autocomplete='username']",
+        ], timeout=4000)
+
+        if email_field:
+            print(f"  Campo email trovato su {login_url}")
+            break
+
+        # Cerca pulsante Sign In e cliccalo
+        sign_in = await wait_visible(page, [
+            "text=Sign In", "text=Log In", "text=Login", "text=Continue with Email",
+            "a[href*='/login']", "a[href*='/signin']",
+            "button:has-text('Sign')", "button:has-text('Login')",
+            "button:has-text('Email')",
+        ], timeout=3000)
+        if sign_in:
+            await sign_in.click()
+            await page.wait_for_load_state("domcontentloaded", timeout=10000)
+            await asyncio.sleep(2)
+            await ss(page, "02_dopo_signin_click")
+            await debug_page(page, "after_click")
+            email_field = await wait_visible(page, [
+                "input[type='email']", "input[name='email']",
+                "input[placeholder*='email' i]", "input[autocomplete='email']",
+            ], timeout=5000)
+            if email_field:
+                break
+
+    if not email_field:
+        await debug_page(page, "FALLITO")
+        raise RuntimeError("Campo email non trovato su nessun URL di login")
+
+    await email_field.fill(EMAIL)
+
+    # Alcuni siti usano flusso email-first: inserisci email → Next → poi password
+    next_btn = await wait_visible(page, [
+        "button[type='submit']", "text=Continue", "text=Next", "text=Avanti"
+    ], timeout=2000)
+    if next_btn:
+        btn_txt = (await next_btn.inner_text()).strip()
+        if "continue" in btn_txt.lower() or "next" in btn_txt.lower() or "avanti" in btn_txt.lower():
+            await next_btn.click()
+            await asyncio.sleep(2)
+            await ss(page, "03_dopo_next")
 
     # Inserisci password
     pw_field = await wait_visible(page, [
         "input[type='password']", "input[name='password']",
-        "input[placeholder*='password' i]"
-    ], timeout=5000)
+        "input[placeholder*='password' i]",
+    ], timeout=8000)
     if pw_field:
         await pw_field.fill(PASSWORD)
     else:
+        await debug_page(page, "no_password")
         raise RuntimeError("Campo password non trovato")
 
-    await ss(page, "03_form_compilato")
+    await ss(page, "04_form_compilato")
 
     # Submit
     submit = await wait_visible(page, [
         "button[type='submit']", "text=Sign In", "text=Continue",
-        "text=Log In", "button:has-text('Sign')"
+        "text=Log In", "button:has-text('Sign')", "button:has-text('Accedi')",
     ], timeout=4000)
     if submit:
         await submit.click()
@@ -135,10 +202,11 @@ async def login(page):
         await pw_field.press("Enter")
 
     await page.wait_for_load_state("networkidle", timeout=30000)
-    await ss(page, "04_dopo_login")
+    await asyncio.sleep(3)
+    await ss(page, "05_dopo_login")
+    await debug_page(page, "dopo_login")
     print(f"  URL dopo login: {page.url}")
 
-    # Verifica login riuscito
     if "login" in page.url.lower() or "signin" in page.url.lower():
         raise RuntimeError(f"Login fallito, ancora su: {page.url}")
     print("  Login OK!")
