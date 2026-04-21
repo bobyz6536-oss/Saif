@@ -50,12 +50,14 @@ jobs:
           git diff --cached --quiet || git commit -m "ci: add generation results [skip ci]"
           git push origin HEAD
 
-      - name: Upload debug screenshots
+      - name: Upload debug screenshots and HTML
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: debug-screenshots
-          path: videos/oggetti-casuali/output/debug/*.png
+          path: |
+            videos/oggetti-casuali/output/debug/*.png
+            videos/oggetti-casuali/output/debug/*.html
           retention-days: 3
 
       - name: Upload generated videos

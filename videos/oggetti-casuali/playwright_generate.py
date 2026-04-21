@@ -86,28 +86,43 @@ async def wait_visible(page, selectors, timeout=5000):
 
 
 async def debug_page(page, label):
-    """Stampa info di debug sulla pagina corrente."""
+    """Stampa info di debug e salva HTML per ispezione."""
     try:
         title = await page.title()
         url = page.url
         inputs = await page.locator("input").all()
         buttons = await page.locator("button").all()
+        anchors = await page.locator("a").all()
         print(f"  [{label}] URL={url} | Title={title}")
-        print(f"  [{label}] Inputs: {len(inputs)} | Buttons: {len(buttons)}")
-        for i, inp in enumerate(inputs[:5]):
+        print(f"  [{label}] Inputs:{len(inputs)} Buttons:{len(buttons)} Links:{len(anchors)}")
+        for i, inp in enumerate(inputs[:8]):
             try:
                 t = await inp.get_attribute("type") or "?"
                 n = await inp.get_attribute("name") or "?"
                 ph = await inp.get_attribute("placeholder") or "?"
-                print(f"    input[{i}] type={t} name={n} placeholder={ph}")
+                cls = (await inp.get_attribute("class") or "")[:30]
+                print(f"    input[{i}] type={t} name={n} ph={ph!r} class={cls!r}")
             except Exception:
                 pass
-        for i, btn in enumerate(buttons[:5]):
+        for i, btn in enumerate(buttons[:8]):
             try:
-                txt = (await btn.inner_text()).strip()[:40]
+                txt = (await btn.inner_text()).strip()[:50]
                 print(f"    button[{i}] text={txt!r}")
             except Exception:
                 pass
+        for i, a in enumerate(anchors[:8]):
+            try:
+                href = await a.get_attribute("href") or "?"
+                txt = (await a.inner_text()).strip()[:30]
+                print(f"    a[{i}] href={href!r} text={txt!r}")
+            except Exception:
+                pass
+        # Salva HTML per ispezione
+        html = await page.content()
+        html_path = str(DBG_DIR / f"{label}.html")
+        with open(html_path, "w", encoding="utf-8") as f:
+            f.write(html[:50000])
+        print(f"  [debug] HTML salvato: {html_path}")
     except Exception as e:
         print(f"  [debug] errore: {e}")
 
