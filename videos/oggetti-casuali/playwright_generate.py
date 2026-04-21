@@ -125,61 +125,74 @@ async def do_login(page):
     await asyncio.sleep(4)
     await screenshot(page, "01_homepage")
 
-    info = await get_page_info(page)
-    print(f"  Title: {info['title']} | Buttons: {info['buttons'][:8]}")
-    results["_page_info"] = info
+    # Accetta cookie banner se presente
+    for sel in ["text=Accept All", "text=Accept all", "text=Accept",
+                "text=Accetta", "button:has-text('Accept')"]:
+        try:
+            btn = page.locator(sel).first
+            if await btn.is_visible(timeout=2000):
+                await btn.click()
+                await asyncio.sleep(1)
+                print("  Cookie banner accettato")
+                break
+        except Exception:
+            pass
 
-    # Clicca link Login (è un <a href="#">)
+    # Clicca link Login
     login_link = await find_visible(page, [
         "a:has-text('Login')", "a:has-text('Log In')", "a:has-text('Sign In')",
     ], timeout=5000)
     if not login_link:
-        raise RuntimeError("Link Login non trovato sulla pagina")
+        raise RuntimeError("Link Login non trovato")
     await login_link.click()
-    await asyncio.sleep(3)
-    await screenshot(page, "02_modal_aperto")
+    print("  Login cliccato, attendo modal...")
+    await asyncio.sleep(4)
+    await screenshot(page, "02_modal")
 
-    # Email dentro il dialog Radix (usa selettore specifico al dialog)
+    # Cerca email — senza prefisso dialog (il form potrebbe essere in un layer diverso)
     email_input = await find_visible(page, [
-        "div[role='dialog'] input[type='email']",
-        "div[role='dialog'] input[name='identifier']",
-        "div[role='dialog'] input[autocomplete='email']",
-        "div[role='dialog'] input[autocomplete='username']",
+        "input[type='email']",
+        "input[name='identifier']",
+        "input[autocomplete='email']",
+        "input[autocomplete='username']",
+        "input[placeholder*='email' i]",
+        "input[placeholder*='mail' i]",
         "div[role='dialog'] input",
-    ], timeout=8000)
+        "input",
+    ], timeout=10000)
     if not email_input:
-        raise RuntimeError("Email input non trovato nel dialog")
+        info = await get_page_info(page)
+        raise RuntimeError(f"Email non trovata. Inputs: {info['inputs']}")
 
     print("  Inserisco email...")
+    await email_input.click()
     await email_input.fill(EMAIL)
     await screenshot(page, "03_email_ok")
 
-    # Submit con force=True (il dialog Radix intercetta pointer events)
-    submit_btn = page.locator("div[role='dialog'] button[type='submit']").first
-    await submit_btn.wait_for(state="visible", timeout=5000)
-    await submit_btn.click(force=True)
+    # Submit (con force=True)
+    submit = page.locator("button[type='submit']").first
+    await submit.wait_for(state="visible", timeout=5000)
+    await submit.click(force=True)
     await asyncio.sleep(3)
-    await screenshot(page, "04_dopo_continue")
+    await screenshot(page, "04_dopo_submit")
 
     # Password
-    pw_input = await find_visible(page, [
-        "div[role='dialog'] input[type='password']",
-        "div[role='dialog'] input[name='password']",
+    pw = await find_visible(page, [
+        "input[type='password']", "input[name='password']",
     ], timeout=10000)
-    if not pw_input:
-        # forse ha già loggato (magic link o social)
-        print("  Password non richiesta, verifica URL...")
-    else:
+    if pw:
         print("  Inserisco password...")
-        await pw_input.fill(PASSWORD)
+        await pw.click()
+        await pw.fill(PASSWORD)
         await screenshot(page, "05_pw_ok")
-        await submit_btn.click(force=True)
+        submit2 = page.locator("button[type='submit']").first
+        await submit2.wait_for(state="visible", timeout=5000)
+        await submit2.click(force=True)
 
     await page.wait_for_load_state("networkidle", timeout=30000)
     await asyncio.sleep(3)
     await screenshot(page, "06_dopo_login")
-    print(f"  URL dopo login: {page.url}")
-    print("  LOGIN OK!")
+    print(f"  URL: {page.url} — LOGIN OK!")
 
 
 async def generate_scene(page, scene, idx):
