@@ -1,7 +1,7 @@
 {
   "_login": {
     "status": "error",
-    "error": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://app.higgsfield.ai/login\nCall log:\n  - navigating to \"https://app.higgsfield.ai/login\", waiting until \"load\"\n",
+    "error": "Campo email non trovato su nessun URL di login",
     "url": "chrome-error://chromewebdata/",
     "html_excerpt": "<html><head></head><body></body></html>"
   }
