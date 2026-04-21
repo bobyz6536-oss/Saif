@@ -1,42 +1,42 @@
 {
   "01-hook": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "02-bicicletta": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "03-materassino": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "04-aquilone": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "05-catapulta": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "06-pallone": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "07-skateboard": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "08-socrate": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "09-aereo": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   },
   "10-finale-cta": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "resolution: '1080' is not one of ['2K', '4K']"
   }
 }
