@@ -1,42 +1,42 @@
 {
   "01-hook": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "02-bicicletta": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "03-materassino": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "04-aquilone": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "05-catapulta": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "06-pallone": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "07-skateboard": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "08-socrate": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "09-aereo": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   },
   "10-finale-cta": {
     "status": "error",
-    "error": "Not enough credits"
+    "error": "duration: '5' is not one of [5, 10]"
   }
 }
