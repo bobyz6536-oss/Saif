@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "higgsfield": {
+      "command": "uvx",
+      "args": ["higgsfield-mcp"],
+      "env": {
+        "HIGGSFIELD_API_KEY": "YOUR_HIGGSFIELD_API_KEY",
+        "HIGGSFIELD_SECRET": "YOUR_HIGGSFIELD_SECRET"
+      }
+    },
+    "nanobanana": {
+      "command": "npx",
+      "args": ["@aeven/nanobanana-mcp"],
+      "env": {
+        "NANOBANANA_API_KEY": "YOUR_NANOBANANA_API_KEY"
+      }
+    },
+    "capcut": {
+      "command": "uvx",
+      "args": ["capcut-ai-editor"]
+    }
+  }
+}
