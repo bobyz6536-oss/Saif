@@ -166,7 +166,7 @@ def generate_image(scene: dict) -> str:
         arguments={
             "prompt": scene["image_prompt"],
             "aspect_ratio": "9:16",
-            "resolution": "2K",
+            "resolution": "1080",
         },
     )
 
