@@ -401,8 +401,15 @@ async def main():
         except Exception as e:
             print(f"ERRORE LOGIN: {e}")
             await ss(page, "FATAL_login_error")
+            # Salva HTML per debug in results così lo leggo via GitHub API
+            try:
+                html = await page.content()
+                html_excerpt = html[:3000]
+            except Exception:
+                html_excerpt = "N/A"
             with open(OUTPUT_DIR / "results.json", "w") as f:
-                json.dump({"_login": {"status": "error", "error": str(e)}}, f, indent=2)
+                json.dump({"_login": {"status": "error", "error": str(e),
+                                      "url": page.url, "html_excerpt": html_excerpt}}, f, indent=2)
             await browser.close()
             return
 
