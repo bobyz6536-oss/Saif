@@ -100,6 +100,10 @@
         "href": "/cookie-notice"
       },
       {
+        "text": "Cookie Settings",
+        "href": "#cookie-settings"
+      },
+      {
         "text": "Home",
         "href": "/"
       },
@@ -114,6 +118,26 @@
       {
         "text": "Profile",
         "href": "/profile"
+      },
+      {
+        "text": "Cookie Policy",
+        "href": "https://higgsfield.ai/cookie-notice"
+      },
+      {
+        "text": "Your Privacy Choices",
+        "href": "https://higgsfield.ai/privacy-policy"
+      },
+      {
+        "text": "Privacy Policy",
+        "href": "https://higgsfield.ai/privacy-policy"
+      },
+      {
+        "text": "Terms of Use",
+        "href": "https://higgsfield.ai/terms-of-use-agreement"
+      },
+      {
+        "text": "Cookie Policy",
+        "href": "https://higgsfield.ai/cookie-notice"
       }
     ],
     "inputs": [
@@ -140,6 +164,30 @@
         "name": "enhancePrompt",
         "placeholder": "",
         "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_strict"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_performance"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_targeting"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_functionality"
       }
     ]
   },
@@ -218,39 +266,39 @@
     "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/01-hook.mp4"
   },
   "02-bicicletta": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/02-bicicletta.mp4"
   },
   "03-materassino": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/03-materassino.mp4"
   },
   "04-aquilone": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/04-aquilone.mp4"
   },
   "05-catapulta": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/05-catapulta.mp4"
   },
   "06-pallone": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/06-pallone.mp4"
   },
   "07-skateboard": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/07-skateboard.mp4"
   },
   "08-socrate": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/08-socrate.mp4"
   },
   "09-aereo": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/09-aereo.mp4"
   },
   "10-finale-cta": {
-    "status": "error",
-    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/10-finale-cta.mp4"
   }
 }
