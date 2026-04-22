@@ -163,19 +163,36 @@ async def do_login(page):
             }
         """)
 
-    await asyncio.sleep(5)
+    await asyncio.sleep(6)
     await screenshot(page, "02_dopo_login_click")
 
-    # Il modal si apre con opzioni social — clicca "Continue with Email"
-    email_btn = await find_visible(page, [
-        "button:has-text('Continue with Email')",
-        "button:has-text('Email')",
-    ], timeout=15000)
-    if not email_btn:
-        raise RuntimeError("Pulsante 'Continue with Email' non trovato nel modal")
-    await email_btn.click(force=True)  # force bypassa overlay Radix
-    print("  'Continue with Email' cliccato")
-    await asyncio.sleep(2)
+    # Aspetta e clicca "Continue with Email" via JS (più affidabile di Playwright click)
+    email_btn_found = False
+    for attempt in range(10):  # max 20s
+        await asyncio.sleep(2)
+        clicked = await page.evaluate("""
+            () => {
+                const btns = [...document.querySelectorAll('button')];
+                const btn = btns.find(b => b.textContent.trim().includes('Continue with Email')
+                                       || b.textContent.trim() === 'Email');
+                if (btn) { btn.click(); return btn.textContent.trim(); }
+                return null;
+            }
+        """)
+        if clicked:
+            print(f"  '{clicked}' cliccato via JS")
+            email_btn_found = True
+            break
+        if attempt == 4:
+            info2 = await get_page_info(page)
+            results["_modal_buttons"] = info2.get("buttons", [])
+            print(f"  Buttons dopo 10s: {info2['buttons'][:10]}")
+
+    if not email_btn_found:
+        info3 = await get_page_info(page)
+        raise RuntimeError(f"Continue with Email non trovato. Buttons={info3['buttons'][:15]}")
+
+    await asyncio.sleep(3)
     await screenshot(page, "03_email_form")
 
     # Ora appare il campo email
