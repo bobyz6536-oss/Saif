@@ -331,12 +331,41 @@ async def do_login(page):
     print("  LOGIN OK!")
 
 
+async def dismiss_overlay(page):
+    """Chiude overlay/modal residui premendo Escape e aspettando che spariscano."""
+    await page.keyboard.press("Escape")
+    await asyncio.sleep(1)
+    # Clicca eventuale pulsante X/close nel modal del risultato
+    for sel in ["button[aria-label='Close']", "button:has-text('×')",
+                "button:has-text('Close')", "[data-testid='modal-close']"]:
+        try:
+            el = page.locator(sel).first
+            if await el.is_visible(timeout=500):
+                await el.click(force=True, timeout=2000)
+                await asyncio.sleep(1)
+                break
+        except Exception:
+            pass
+
+
 async def generate_scene(page, scene, idx):
+    # Fresh navigation removes overlay left from previous generation
+    print(f"  Nav fresh a /ai/video...")
+    try:
+        await page.goto("https://higgsfield.ai/ai/video", timeout=20000)
+        await page.wait_for_load_state("domcontentloaded", timeout=15000)
+        await asyncio.sleep(3)
+    except Exception as e:
+        print(f"  Nav WARN: {e}")
+
+    await dismiss_overlay(page)
+    await screenshot(page, f"{idx:02d}_start")
+
     print(f"  Cerco prompt field...")
 
     prompt_field = await find_visible(page, [
-        "textarea",
         "div[contenteditable='true']",
+        "textarea",
         "input[placeholder*='prompt' i]",
         "input[placeholder*='describe' i]",
         "[data-testid*='prompt']",
@@ -347,16 +376,18 @@ async def generate_scene(page, scene, idx):
         info = await get_page_info(page)
         raise RuntimeError(f"Prompt field non trovato. Inputs: {info['inputs']}")
 
-    await prompt_field.click(timeout=5000)
-    await prompt_field.fill("")
+    # force=True bypasses any residual overlay
+    await prompt_field.click(force=True, timeout=5000)
+    # Use JS to set value in Lexical editor (fill() alone may not trigger React state)
     await prompt_field.fill(scene["prompt"])
+    await page.keyboard.press("End")  # ensure cursor at end to confirm text was accepted
 
     # Aspect ratio 9:16
     for sel in ["text=9:16", "option[value='9:16']", "[data-ratio='9:16']"]:
         try:
             el = page.locator(sel).first
             if await el.is_visible(timeout=1000):
-                await el.click(timeout=3000)
+                await el.click(force=True, timeout=3000)
                 break
         except Exception:
             pass
@@ -368,7 +399,7 @@ async def generate_scene(page, scene, idx):
     if not gen_btn:
         raise RuntimeError("Pulsante Generate non trovato")
 
-    await gen_btn.click(timeout=5000)
+    await gen_btn.click(force=True, timeout=5000)
     print("  Generazione avviata...")
     await screenshot(page, f"{idx:02d}_avviata")
 
