@@ -32,13 +32,20 @@ jobs:
           pip install playwright httpx
           playwright install chromium --with-deps
 
+      - name: Restore previously generated videos
+        run: |
+          mkdir -p videos/oggetti-casuali/output/debug
+          if ls videos/oggetti-casuali/*.mp4 2>/dev/null | head -1; then
+            echo "Copio video esistenti in output/..."
+            cp videos/oggetti-casuali/*.mp4 videos/oggetti-casuali/output/ 2>/dev/null || true
+          fi
+
       - name: Network diagnostics
         run: |
           echo "=== DNS check ==="
           nslookup higgsfield.ai || true
           echo "=== Curl check ==="
           curl -s -o /dev/null -w "higgsfield.ai: %{http_code}\n" https://higgsfield.ai --max-time 10 || true
-          curl -s -o /dev/null -w "higgsfield.ai/ai/video: %{http_code}\n" https://higgsfield.ai/ai/video --max-time 10 || true
 
       - name: Generate videos via browser automation
         continue-on-error: true
@@ -46,18 +53,19 @@ jobs:
           HF_EMAIL: "BOBYZ6536@gmail.com"
           HF_PASSWORD: "Saifahmed12345@"
         run: |
-          mkdir -p videos/oggetti-casuali/output/debug
           cd videos/oggetti-casuali
           python playwright_generate.py || true
 
-      - name: Commit results back to repo
+      - name: Commit results and videos back to repo
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp videos/oggetti-casuali/output/results.json videos/oggetti-casuali/results-latest.json
+          cp videos/oggetti-casuali/output/results.json videos/oggetti-casuali/results-latest.json 2>/dev/null || true
+          cp videos/oggetti-casuali/output/*.mp4 videos/oggetti-casuali/ 2>/dev/null || true
           git add videos/oggetti-casuali/results-latest.json
-          git diff --cached --quiet || git commit -m "ci: add generation results [skip ci]"
+          git add videos/oggetti-casuali/*.mp4 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "ci: add generation results and videos [skip ci]"
           git push origin HEAD
 
       - name: Upload debug screenshots and HTML

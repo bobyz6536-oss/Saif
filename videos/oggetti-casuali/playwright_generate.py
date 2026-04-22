@@ -349,6 +349,12 @@ async def dismiss_overlay(page):
 
 
 async def generate_scene(page, scene, idx):
+    # Skip if already generated in a previous run
+    out = str(OUTPUT_DIR / f"{scene['id']}.mp4")
+    if os.path.exists(out) and os.path.getsize(out) > 10000:
+        print(f"  Già esistente, skip: {out}")
+        return out
+
     # Fresh navigation removes overlay left from previous generation
     print(f"  Nav fresh a /ai/video...")
     try:
@@ -426,7 +432,6 @@ async def generate_scene(page, scene, idx):
     if not video_url:
         raise RuntimeError("Timeout: video non generato in 8 min")
 
-    out = str(OUTPUT_DIR / f"{scene['id']}.mp4")
     async with httpx.AsyncClient(follow_redirects=True, timeout=120) as client:
         r = await client.get(video_url)
         r.raise_for_status()
