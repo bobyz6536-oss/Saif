@@ -143,8 +143,114 @@
       }
     ]
   },
-  "_login": {
+  "_signin_page": {
+    "url": "https://higgsfield.ai/sign-in",
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community"
+    ],
+    "inputs": []
+  },
+  "_btns_0": [
+    "Image",
+    "Video",
+    "Audio",
+    "Edit",
+    "Character",
+    "Community",
+    "Mix",
+    "Change",
+    "Elements",
+    "Model\n\nKling 3.0"
+  ],
+  "_after_email_submit": {
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community",
+      "Mix",
+      "Change",
+      "Elements",
+      "Model\n\nKling 3.0"
+    ],
+    "inputs": [
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "email",
+        "name": "email",
+        "placeholder": "Email",
+        "id": ""
+      }
+    ]
+  },
+  "01-hook": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/01-hook.mp4"
+  },
+  "02-bicicletta": {
     "status": "error",
-    "error": "Timeout 30000ms exceeded."
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "03-materassino": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "04-aquilone": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "05-catapulta": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "06-pallone": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "07-skateboard": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "08-socrate": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "09-aereo": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  "10-finale-cta": {
+    "status": "error",
+    "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable='true']\").first\n    - locator resolved to <div role=\"textbox\" spellcheck=\"true\" contenteditable=\"true\" data-lexical-editor=\"true\" class=\"text-sm focus:outline-none size-full cursor-text p-3 pt-9 pt-3!\" aria-placeholder=\"Describe your video, like \"A woman walking through a neon-lit city\". Add elements using @\">\u2026</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    9 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"absolute inset-0 bg-[#0F1113]/50\"></div> from <div id=\"create-page-content\" class=\"flex-1 min-h-0 size-full relative flex flex-col gap-2.5 pb-3\">\u2026</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 500ms\n"
   }
 }
