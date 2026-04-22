@@ -71,8 +71,16 @@ async def screenshot(page, name):
         pass
 
 
+async def save_html(page, name):
+    try:
+        html = await page.content()
+        with open(str(DBG_DIR / f"{name}.html"), "w", encoding="utf-8") as f:
+            f.write(html)
+    except Exception:
+        pass
+
+
 async def get_page_info(page):
-    """Raccoglie testo visibile, pulsanti, link dalla pagina."""
     info = {"url": page.url, "title": "", "body_text": "", "buttons": [], "links": [], "inputs": []}
     try:
         info["title"] = await page.title()
@@ -119,119 +127,208 @@ async def find_visible(page, selectors, timeout=5000):
 
 
 async def do_login(page):
-    print("[Login] Apertura higgsfield.ai/ai/video ...")
-    await page.goto("https://higgsfield.ai/ai/video", timeout=30000)
-    await page.wait_for_load_state("load", timeout=20000)
+    print("[Login] STEP 1: goto higgsfield.ai/ai/video")
+    try:
+        await page.goto("https://higgsfield.ai/ai/video", timeout=30000)
+        await page.wait_for_load_state("domcontentloaded", timeout=20000)
+    except Exception as e:
+        print(f"  STEP 1 WARN: {e}")
     await asyncio.sleep(4)
     await screenshot(page, "01_homepage")
+    await save_html(page, "01_homepage")
 
-    # Salva diagnostics pagina
     info = await get_page_info(page)
     results["_page_info"] = info
-    print(f"  Buttons visibili: {info['buttons'][:6]}")
+    print(f"  URL: {page.url}")
+    print(f"  Buttons: {info['buttons'][:10]}")
+    print(f"  Inputs: {info['inputs'][:5]}")
 
-    # Chiudi cookie banner prima di tutto
+    # Cookie banner
+    print("[Login] STEP 2: cookie banner")
     for sel in ["button:has-text('Accept All')", "button:has-text('Accept')",
                 "button:has-text('OK')", "button:has-text('Agree')"]:
         try:
             btn = page.locator(sel).first
             if await btn.is_visible(timeout=1500):
-                await btn.click(force=True)
+                await btn.click(force=True, timeout=3000)
                 await asyncio.sleep(2)
-                print("  Cookie banner chiuso")
+                print(f"  Cookie chiuso: {sel}")
                 break
         except Exception:
             pass
 
-    # Clicca Login con force=True (bypassa overlay Radix/cookie)
-    login = page.locator("a:has-text('Login')").first
+    # Try direct /sign-in navigation
+    print("[Login] STEP 3: provo /sign-in diretto")
     try:
-        await login.wait_for(state="attached", timeout=5000)
-        await login.scroll_into_view_if_needed()
-        await login.click(force=True, timeout=5000)
-        print("  Login cliccato (force)")
+        await page.goto("https://higgsfield.ai/sign-in", timeout=15000)
+        await page.wait_for_load_state("domcontentloaded", timeout=10000)
+        await asyncio.sleep(3)
     except Exception as e:
-        print(f"  Login click fallito: {e}, provo via evaluate...")
-        # Fallback: triggera React click via dispatchEvent
-        await page.evaluate("""
-            () => {
-                const links = [...document.querySelectorAll('a')];
-                const login = links.find(l => l.textContent.trim() === 'Login');
-                if (login) {
-                    login.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
-                }
-            }
-        """)
+        print(f"  STEP 3 WARN: {e}")
+    await screenshot(page, "02_signin")
+    await save_html(page, "02_signin")
+    info_si = await get_page_info(page)
+    print(f"  /sign-in URL: {page.url}")
+    print(f"  /sign-in Buttons: {info_si['buttons'][:8]}")
+    print(f"  /sign-in Inputs: {info_si['inputs'][:5]}")
+    results["_signin_page"] = {
+        "url": page.url,
+        "buttons": info_si['buttons'][:10],
+        "inputs": info_si['inputs'][:5],
+    }
 
-    await asyncio.sleep(6)
-    await screenshot(page, "02_dopo_login_click")
-
-    # Aspetta e clicca "Continue with Email" via JS (più affidabile di Playwright click)
-    email_btn_found = False
-    for attempt in range(10):  # max 20s
-        await asyncio.sleep(2)
-        clicked = await page.evaluate("""
-            () => {
-                const btns = [...document.querySelectorAll('button')];
-                const btn = btns.find(b => b.textContent.trim().includes('Continue with Email')
-                                       || b.textContent.trim() === 'Email');
-                if (btn) { btn.click(); return btn.textContent.trim(); }
-                return null;
-            }
-        """)
-        if clicked:
-            print(f"  '{clicked}' cliccato via JS")
-            email_btn_found = True
-            break
-        if attempt == 4:
-            info2 = await get_page_info(page)
-            results["_modal_buttons"] = info2.get("buttons", [])
-            print(f"  Buttons dopo 10s: {info2['buttons'][:10]}")
-
-    if not email_btn_found:
-        info3 = await get_page_info(page)
-        raise RuntimeError(f"Continue with Email non trovato. Buttons={info3['buttons'][:15]}")
-
-    await asyncio.sleep(3)
-    await screenshot(page, "03_email_form")
-
-    # Ora appare il campo email
+    # Check if email input appeared after /sign-in redirect
     email_input = await find_visible(page, [
         "input[type='email']", "input[name='identifier']",
         "input[autocomplete='email']", "input[placeholder*='email' i]",
-    ], timeout=8000)
+    ], timeout=3000)
+
     if not email_input:
-        raise RuntimeError("Campo email non trovato dopo 'Continue with Email'")
+        # Go back home and open login modal
+        print("[Login] STEP 4: torno a home, click Login")
+        try:
+            await page.goto("https://higgsfield.ai/ai/video", timeout=20000)
+            await page.wait_for_load_state("domcontentloaded", timeout=15000)
+        except Exception as e:
+            print(f"  STEP 4 WARN: {e}")
+        await asyncio.sleep(3)
 
-    print("  Inserisco email...")
-    await email_input.click()
+        print("[Login] STEP 5: click Login link")
+        try:
+            login = page.locator("a:has-text('Login')").first
+            await login.wait_for(state="visible", timeout=5000)
+            await login.click(force=True, timeout=5000)
+            print("  Login cliccato via Playwright")
+        except Exception as e:
+            print(f"  Login Playwright fallito: {e}")
+            r = await page.evaluate("""
+                () => {
+                    const el = [...document.querySelectorAll('a')]
+                        .find(a => /login/i.test(a.textContent.trim()));
+                    if (el) {
+                        el.dispatchEvent(new MouseEvent('click', {bubbles:true, cancelable:true}));
+                        return el.outerHTML.slice(0, 120);
+                    }
+                    return null;
+                }
+            """)
+            print(f"  Login via JS: {r}")
+
+        await asyncio.sleep(6)
+        await screenshot(page, "03_dopo_login_click")
+        await save_html(page, "03_dopo_login_click")
+
+        print("[Login] STEP 6: aspetto Continue with Email (max 30s)")
+        email_btn_found = False
+        for attempt in range(15):
+            await asyncio.sleep(2)
+
+            if attempt % 3 == 0:
+                snap = await get_page_info(page)
+                print(f"  attempt {attempt}: btns={snap['buttons'][:8]}")
+                results[f"_btns_{attempt}"] = snap['buttons'][:10]
+            if attempt == 6:
+                await screenshot(page, "03b_modal_6s")
+                await save_html(page, "03b_modal_6s")
+
+            clicked = await page.evaluate("""
+                () => {
+                    // Try Clerk data-localization-key attributes
+                    const byKey = document.querySelector(
+                        '[data-localization-key="socialButtonsBlockButton__email"],' +
+                        '[data-localization-key*="emailAddress"],' +
+                        '[data-localization-key*="email"]'
+                    );
+                    if (byKey) {
+                        byKey.click();
+                        return 'clerk-key:' + (byKey.textContent || byKey.outerHTML).slice(0, 60);
+                    }
+                    const all = [...document.querySelectorAll('button, [role="button"]')];
+                    const btn = all.find(b =>
+                        b.textContent.trim().includes('Continue with Email') ||
+                        b.textContent.trim() === 'Email' ||
+                        /email/i.test(b.getAttribute('data-localization-key') || '')
+                    );
+                    if (btn) { btn.click(); return btn.textContent.trim(); }
+                    return null;
+                }
+            """)
+            if clicked:
+                print(f"  STEP 6 OK: '{clicked}'")
+                email_btn_found = True
+                break
+
+        if not email_btn_found:
+            snap3 = await get_page_info(page)
+            await save_html(page, "ERROR_no_email_btn")
+            raise RuntimeError(
+                f"Continue with Email non trovato dopo 30s. Buttons={snap3['buttons'][:15]}"
+            )
+
+        await asyncio.sleep(3)
+        await screenshot(page, "04_email_form")
+        await save_html(page, "04_email_form")
+
+        email_input = await find_visible(page, [
+            "input[type='email']", "input[name='identifier']",
+            "input[autocomplete='email']", "input[placeholder*='email' i]",
+        ], timeout=8000)
+        if not email_input:
+            snap4 = await get_page_info(page)
+            await save_html(page, "ERROR_no_email_input")
+            raise RuntimeError(f"Campo email non trovato. Inputs={snap4['inputs']}")
+
+    print("[Login] STEP 7: inserisci email")
+    await email_input.click(timeout=5000)
     await email_input.fill(EMAIL)
-    await screenshot(page, "03_email_ok")
+    await screenshot(page, "05_email_filled")
 
-    # Submit (con force=True)
+    print("[Login] STEP 8: submit email")
     submit = page.locator("button[type='submit']").first
     await submit.wait_for(state="visible", timeout=5000)
-    await submit.click(force=True)
+    await submit.click(force=True, timeout=5000)
     await asyncio.sleep(3)
-    await screenshot(page, "04_dopo_submit")
+    await screenshot(page, "06_dopo_submit")
+    await save_html(page, "06_dopo_submit")
+    snap5 = await get_page_info(page)
+    print(f"  Dopo submit: btns={snap5['buttons'][:8]}, inputs={snap5['inputs'][:4]}")
+    results["_after_email_submit"] = {
+        "buttons": snap5['buttons'][:10],
+        "inputs": snap5['inputs'][:5],
+    }
 
-    # Password
+    print("[Login] STEP 9: password")
     pw = await find_visible(page, [
         "input[type='password']", "input[name='password']",
     ], timeout=10000)
     if pw:
-        print("  Inserisco password...")
-        await pw.click()
+        print("  Password field trovato, inserisco...")
+        await pw.click(timeout=5000)
         await pw.fill(PASSWORD)
-        await screenshot(page, "05_pw_ok")
+        await screenshot(page, "07_pw_filled")
         submit2 = page.locator("button[type='submit']").first
         await submit2.wait_for(state="visible", timeout=5000)
-        await submit2.click(force=True)
+        await submit2.click(force=True, timeout=5000)
+        print("  Password submitted")
+    else:
+        snap6 = await get_page_info(page)
+        print(f"  WARN: password field non trovato. btns={snap6['buttons'][:8]}")
 
-    await page.wait_for_load_state("networkidle", timeout=30000)
+    print("[Login] STEP 10: attendo caricamento")
+    try:
+        await page.wait_for_load_state("networkidle", timeout=20000)
+    except Exception as e:
+        print(f"  networkidle WARN: {e}")
     await asyncio.sleep(3)
-    await screenshot(page, "06_dopo_login")
-    print(f"  URL: {page.url} — LOGIN OK!")
+    await screenshot(page, "08_dopo_login")
+    await save_html(page, "08_dopo_login")
+    print(f"  URL finale: {page.url}")
+
+    if "sign-in" in page.url or "/login" in page.url:
+        snap7 = await get_page_info(page)
+        raise RuntimeError(f"Ancora su pagina login: {page.url}, btns={snap7['buttons'][:10]}")
+
+    print("  LOGIN OK!")
 
 
 async def generate_scene(page, scene, idx):
@@ -250,7 +347,7 @@ async def generate_scene(page, scene, idx):
         info = await get_page_info(page)
         raise RuntimeError(f"Prompt field non trovato. Inputs: {info['inputs']}")
 
-    await prompt_field.click()
+    await prompt_field.click(timeout=5000)
     await prompt_field.fill("")
     await prompt_field.fill(scene["prompt"])
 
@@ -259,7 +356,7 @@ async def generate_scene(page, scene, idx):
         try:
             el = page.locator(sel).first
             if await el.is_visible(timeout=1000):
-                await el.click()
+                await el.click(timeout=3000)
                 break
         except Exception:
             pass
@@ -271,7 +368,7 @@ async def generate_scene(page, scene, idx):
     if not gen_btn:
         raise RuntimeError("Pulsante Generate non trovato")
 
-    await gen_btn.click()
+    await gen_btn.click(timeout=5000)
     print("  Generazione avviata...")
     await screenshot(page, f"{idx:02d}_avviata")
 
@@ -332,6 +429,7 @@ async def main():
         except Exception as e:
             print(f"ERRORE LOGIN: {e}")
             await screenshot(page, "ERROR_login")
+            await save_html(page, "ERROR_login")
             results["_login"] = {"status": "error", "error": str(e)}
             save_results()
             await browser.close()
@@ -342,7 +440,8 @@ async def main():
             await page.goto("https://higgsfield.ai/ai/video", timeout=20000)
             await page.wait_for_load_state("load", timeout=15000)
             await asyncio.sleep(3)
-            await screenshot(page, "06_video_page")
+            await screenshot(page, "09_video_page")
+            await save_html(page, "09_video_page")
         except Exception as e:
             print(f"  Navigazione video page: {e}")
 
@@ -366,13 +465,12 @@ async def main():
 
 
 if __name__ == "__main__":
-    # Importa playwright qui per catturare errori di import
     try:
         from playwright.async_api import async_playwright  # noqa: F401
     except ImportError as e:
         results["_fatal"] = {"status": "error", "error": f"Playwright non installato: {e}"}
         save_results()
-        sys.exit(0)  # Exit 0 per permettere commit del results
+        sys.exit(0)
 
     try:
         asyncio.run(main())
@@ -383,4 +481,4 @@ if __name__ == "__main__":
         results["_fatal"] = {"status": "error", "error": str(e)}
         save_results()
 
-    sys.exit(0)  # Sempre 0: il workflow non fallisce, vediamo i risultati
+    sys.exit(0)
