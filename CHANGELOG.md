@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.1.0] — 2026-04-23
+
+### 新增 Added · Aggiunto
+
+#### 地区专项 Regional · Regionale
+- `16-usa-americana` — 美国/美式风格 | USA / Americana — patriotic themes, landscapes, sports, lifestyle | Stile americano, temi patriottici, paesaggi, sport, vita quotidiana
+
+### 语言扩展 Language Expansion · Espansione Lingue
+- 新增 **意大利语版本** | Added **Italian (IT)** version | Aggiunta versione in **Italiano**
+- 技能现支持 3 种语言：中文 + 英语（提示词）+ 意大利语 | Skills now available in 3 languages: ZH + EN prompts + IT
+
+### 统计 Stats · Statistiche
+- 新增 2 个文件 | 2 new files added: `skills/it/16-usa-americana.md` + `skills/zh/16-usa-americana.md`
+
+---
+
 ## [1.0.0] — 2026-04-09
 
 ### 新增 Added
