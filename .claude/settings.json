@@ -5,11 +5,11 @@
       "args": ["@playwright/mcp@latest"]
     },
     "higgsfield": {
-      "command": "uvx",
+      "command": "npx",
       "args": ["higgsfield-mcp"],
       "env": {
-        "HIGGSFIELD_API_KEY": "YOUR_HIGGSFIELD_API_KEY",
-        "HIGGSFIELD_SECRET": "YOUR_HIGGSFIELD_SECRET"
+        "HF_API_KEY": "YOUR_HF_API_KEY",
+        "HF_SECRET": "YOUR_HF_SECRET"
       }
     },
     "nanobanana": {
