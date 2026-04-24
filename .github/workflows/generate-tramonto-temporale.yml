@@ -1,0 +1,92 @@
+name: Generate Viaggiare nel Tempo Video
+
+on:
+  push:
+    branches:
+      - claude/generate-sunset-video-NhwKZ
+    paths:
+      - 'videos/viaggiare-nel-tempo/**'
+      - '.github/workflows/generate-tramonto-temporale.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install higgsfield-client httpx
+
+      - name: Create output directory
+        run: mkdir -p videos/viaggiare-nel-tempo/output
+
+      - name: Network diagnostics
+        run: |
+          echo "=== DNS check ==="
+          nslookup higgsfield.ai || true
+          echo "=== Curl check ==="
+          curl -s -o /dev/null -w "higgsfield.ai: %{http_code}\n" https://higgsfield.ai --max-time 10 || true
+
+      - name: Generate images (NanoBanana v1) + videos (Kling 2.6)
+        continue-on-error: true
+        env:
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          HF_API_SECRET: ${{ secrets.HF_API_SECRET }}
+        run: |
+          cd videos/viaggiare-nel-tempo
+          python generate.py
+
+      - name: Commit results back to repo
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp videos/viaggiare-nel-tempo/output/results.json \
+             videos/viaggiare-nel-tempo/results-latest.json 2>/dev/null || true
+          cp videos/viaggiare-nel-tempo/output/*.mp4 \
+             videos/viaggiare-nel-tempo/ 2>/dev/null || true
+          git add videos/viaggiare-nel-tempo/results-latest.json || true
+          git add videos/viaggiare-nel-tempo/*.mp4 2>/dev/null || true
+          git add videos/viaggiare-nel-tempo/*.png 2>/dev/null || true
+          git diff --cached --quiet || \
+            git commit -m "ci: viaggiare-nel-tempo — immagini NanoBanana + video Kling 2.6 [skip ci]"
+          git push origin HEAD
+
+      - name: Upload generated images
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: viaggiare-nel-tempo-images
+          path: videos/viaggiare-nel-tempo/output/*.png
+          retention-days: 7
+
+      - name: Upload generated videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: viaggiare-nel-tempo-videos
+          path: videos/viaggiare-nel-tempo/output/*.mp4
+          retention-days: 7
+
+      - name: Upload generation report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: viaggiare-nel-tempo-report
+          path: videos/viaggiare-nel-tempo/output/results.json
+          retention-days: 7
