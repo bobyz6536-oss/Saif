@@ -1,0 +1,312 @@
+{
+  "01-hook": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "02-girare-veloce": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "03-freezer": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "04-dormire-tanto": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "05-specchio-torcia": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "06-velocita-luce": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "07-buco-nero": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "08-socrate": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "09-soluzione": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  },
+  "10-finale": {
+    "images": [
+      {
+        "index": 1,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "path": null
+      },
+      {
+        "index": 3,
+        "status": "error",
+        "path": null
+      }
+    ],
+    "videos": [
+      {
+        "index": 1,
+        "status": "error",
+        "error": "Invalid credentials"
+      },
+      {
+        "index": 2,
+        "status": "error",
+        "error": "Invalid credentials"
+      }
+    ]
+  }
+}
