@@ -1,0 +1,304 @@
+{
+  "_page_info": {
+    "url": "https://higgsfield.ai/ai/video",
+    "title": "Create AI Videos from Text & Image | Higgsfield",
+    "body_text": "Explore\nImage\nVideo\nAudio\nCollab\nEdit\nCharacter\nMarketing Studio\nNew\nCinema Studio\n3.5\nOriginals\nNew\nApps\nAssist\nCommunity\nPricing\n30% OFF\nLogin\nSign up\nCreate Video\nEdit Video\nMotion Control\n\nGENERAL\n\nKling 3.0\n\nChange\n\nOptional\n\nStart frame\n\nOptional\n\nEnd frame\n\nMulti-shot\nDescribe your video, like \"A woman walking through a neon-lit city\". Add elements using @\nEnhance on\nOn\nElements\nModel\n\nKling 3.0\n\nUNLIMITED\n\n30% OFF\n\nSEEDANCE 2.0 & 2.0 FAST IS AVAILABLE\n\nWorld's best video model available at 30% OFF with special offer\n\nTry it now\n5s\n16:9\n16:9\n9:16\n1:1\n720p\n720p\n1080p\nGenerate\n10\nHistory\nHow it works\nMAKE VIDEOS IN ONE CLICK\n\n250+ presets for camera control, framing, and high-quality VFX - or use the general preset for manual control.\n\nADD IMAGE\n\nUpload or generate an image to start y",
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community",
+      "Mix",
+      "Change",
+      "Elements",
+      "Model\n\nKling 3.0",
+      "Try it now",
+      "5s",
+      "16:9",
+      "720p",
+      "Generate\n10",
+      "History",
+      "How it works"
+    ],
+    "links": [
+      {
+        "text": "",
+        "href": "/"
+      },
+      {
+        "text": "Explore",
+        "href": "/"
+      },
+      {
+        "text": "Collab",
+        "href": "/generate"
+      },
+      {
+        "text": "Marketing Studio\nNew",
+        "href": "/marketing-studio/product"
+      },
+      {
+        "text": "Cinema Studio\n3.5",
+        "href": "/cinema-studio?autoSelectFolder=true"
+      },
+      {
+        "text": "Originals\nNew",
+        "href": "/original-series"
+      },
+      {
+        "text": "Apps",
+        "href": "/apps"
+      },
+      {
+        "text": "Assist",
+        "href": "/chat"
+      },
+      {
+        "text": "Pricing\n30% OFF",
+        "href": "/pricing"
+      },
+      {
+        "text": "",
+        "href": "https://www.instagram.com/higgsfield.ai"
+      },
+      {
+        "text": "Pricing",
+        "href": "/pricing"
+      },
+      {
+        "text": "Try Free",
+        "href": "#"
+      },
+      {
+        "text": "Login",
+        "href": "#"
+      },
+      {
+        "text": "Sign up",
+        "href": "#"
+      },
+      {
+        "text": "Press",
+        "href": "mailto:press@higgsfield.ai"
+      },
+      {
+        "text": "Creative Challenge",
+        "href": "/creative-challenge"
+      },
+      {
+        "text": "Privacy",
+        "href": "/privacy-policy"
+      },
+      {
+        "text": "Terms",
+        "href": "/terms-of-use-agreement"
+      },
+      {
+        "text": "Cookie Notice",
+        "href": "/cookie-notice"
+      },
+      {
+        "text": "Cookie Settings",
+        "href": "#cookie-settings"
+      },
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Community",
+        "href": "/project/submit"
+      },
+      {
+        "text": "Library",
+        "href": "/library/image"
+      },
+      {
+        "text": "Profile",
+        "href": "/profile"
+      },
+      {
+        "text": "Cookie Policy",
+        "href": "https://higgsfield.ai/cookie-notice"
+      },
+      {
+        "text": "Your Privacy Choices",
+        "href": "https://higgsfield.ai/privacy-policy"
+      },
+      {
+        "text": "Privacy Policy",
+        "href": "https://higgsfield.ai/privacy-policy"
+      },
+      {
+        "text": "Terms of Use",
+        "href": "https://higgsfield.ai/terms-of-use-agreement"
+      },
+      {
+        "text": "Cookie Policy",
+        "href": "https://higgsfield.ai/cookie-notice"
+      }
+    ],
+    "inputs": [
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_strict"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_performance"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_targeting"
+      },
+      {
+        "type": "checkbox",
+        "name": "",
+        "placeholder": "",
+        "id": "cookiescript_category_functionality"
+      }
+    ]
+  },
+  "_signin_page": {
+    "url": "https://higgsfield.ai/sign-in",
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community"
+    ],
+    "inputs": []
+  },
+  "_btns_0": [
+    "Image",
+    "Video",
+    "Audio",
+    "Edit",
+    "Character",
+    "Community",
+    "Mix",
+    "Change",
+    "Elements",
+    "Model\n\nKling 3.0"
+  ],
+  "_after_email_submit": {
+    "buttons": [
+      "Image",
+      "Video",
+      "Audio",
+      "Edit",
+      "Character",
+      "Community",
+      "Mix",
+      "Change",
+      "Elements",
+      "Model\n\nKling 3.0"
+    ],
+    "inputs": [
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "file",
+        "name": "",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "checkbox",
+        "name": "enhancePrompt",
+        "placeholder": "",
+        "id": ""
+      },
+      {
+        "type": "email",
+        "name": "email",
+        "placeholder": "Email",
+        "id": ""
+      }
+    ]
+  },
+  "01-hook": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/01-hook.mp4"
+  },
+  "02-bicicletta": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/02-bicicletta.mp4"
+  },
+  "03-materassino": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/03-materassino.mp4"
+  },
+  "04-aquilone": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/04-aquilone.mp4"
+  },
+  "05-catapulta": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/05-catapulta.mp4"
+  },
+  "06-pallone": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/06-pallone.mp4"
+  },
+  "07-skateboard": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/07-skateboard.mp4"
+  },
+  "08-socrate": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/08-socrate.mp4"
+  },
+  "09-aereo": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/09-aereo.mp4"
+  },
+  "10-finale-cta": {
+    "status": "ok",
+    "path": "/home/runner/work/Saif/Saif/videos/oggetti-casuali/output/10-finale-cta.mp4"
+  }
+}

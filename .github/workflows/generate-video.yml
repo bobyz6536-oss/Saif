@@ -1,0 +1,94 @@
+name: Generate Oggetti Casuali Video
+
+on:
+  push:
+    branches:
+      - claude/higgsfield-mcp-4aIfG
+    paths:
+      - 'videos/oggetti-casuali/**'
+      - '.github/workflows/generate-video.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install playwright httpx
+          playwright install chromium --with-deps
+
+      - name: Restore previously generated videos
+        run: |
+          mkdir -p videos/oggetti-casuali/output/debug
+          if ls videos/oggetti-casuali/*.mp4 2>/dev/null | head -1; then
+            echo "Copio video esistenti in output/..."
+            cp videos/oggetti-casuali/*.mp4 videos/oggetti-casuali/output/ 2>/dev/null || true
+          fi
+
+      - name: Network diagnostics
+        run: |
+          echo "=== DNS check ==="
+          nslookup higgsfield.ai || true
+          echo "=== Curl check ==="
+          curl -s -o /dev/null -w "higgsfield.ai: %{http_code}\n" https://higgsfield.ai --max-time 10 || true
+
+      - name: Generate videos via browser automation
+        continue-on-error: true
+        env:
+          HF_EMAIL: "BOBYZ6536@gmail.com"
+          HF_PASSWORD: "Saifahmed12345@"
+        run: |
+          cd videos/oggetti-casuali
+          python playwright_generate.py || true
+
+      - name: Commit results and videos back to repo
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cp videos/oggetti-casuali/output/results.json videos/oggetti-casuali/results-latest.json 2>/dev/null || true
+          cp videos/oggetti-casuali/output/*.mp4 videos/oggetti-casuali/ 2>/dev/null || true
+          git add videos/oggetti-casuali/results-latest.json
+          git add videos/oggetti-casuali/*.mp4 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "ci: add generation results and videos [skip ci]"
+          git push origin HEAD
+
+      - name: Upload debug screenshots and HTML
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: debug-screenshots
+          path: |
+            videos/oggetti-casuali/output/debug/*.png
+            videos/oggetti-casuali/output/debug/*.html
+          retention-days: 3
+
+      - name: Upload generated videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: oggetti-casuali-scenes
+          path: videos/oggetti-casuali/output/*.mp4
+          retention-days: 7
+
+      - name: Upload generation report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: generation-report
+          path: videos/oggetti-casuali/output/results.json
+          retention-days: 7
