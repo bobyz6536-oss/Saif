@@ -415,6 +415,9 @@ def generate_image(nano_ep: str, prompt: str, out_path: str) -> str | None:
                 "prompt": prompt,
                 "aspect_ratio": "9:16",
                 "num_images": 1,
+                "width": 576,
+                "height": 1024,
+                "resolution": "1024",
             },
         )
         img_url = (
@@ -443,6 +446,7 @@ def generate_video(prompt: str, image_path: str | None, out_path: str) -> str:
             "duration": 5,
             "aspect_ratio": "9:16",
             "cfg_scale": 0.5,
+            "resolution": "720p",
         }
         try:
             with open(image_path, "rb") as f:
@@ -463,6 +467,7 @@ def generate_video(prompt: str, image_path: str | None, out_path: str) -> str:
                 "duration": 5,
                 "aspect_ratio": "9:16",
                 "cfg_scale": 0.5,
+                "resolution": "720p",
             },
         )
 
