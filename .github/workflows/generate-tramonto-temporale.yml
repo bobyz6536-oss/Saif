@@ -73,6 +73,7 @@ jobs:
         with:
           name: viaggiare-nel-tempo-images
           path: videos/viaggiare-nel-tempo/output/*.png
+          if-no-files-found: warn
           retention-days: 7
 
       - name: Upload generated videos
@@ -81,6 +82,7 @@ jobs:
         with:
           name: viaggiare-nel-tempo-videos
           path: videos/viaggiare-nel-tempo/output/*.mp4
+          if-no-files-found: warn
           retention-days: 7
 
       - name: Upload generation report
@@ -89,4 +91,5 @@ jobs:
         with:
           name: viaggiare-nel-tempo-report
           path: videos/viaggiare-nel-tempo/output/results.json
+          if-no-files-found: warn
           retention-days: 7
