@@ -44,9 +44,6 @@ jobs:
 
       - name: Generate images (NanoBanana v1) + videos (Kling 2.6)
         continue-on-error: true
-        env:
-          HF_API_KEY: ${{ secrets.HF_API_KEY }}
-          HF_API_SECRET: ${{ secrets.HF_API_SECRET }}
         run: |
           cd videos/viaggiare-nel-tempo
           python generate.py
@@ -65,7 +62,8 @@ jobs:
           git add videos/viaggiare-nel-tempo/*.png 2>/dev/null || true
           git diff --cached --quiet || \
             git commit -m "ci: viaggiare-nel-tempo — immagini NanoBanana + video Kling 2.6 [skip ci]"
-          git push origin HEAD
+          git pull --rebase origin claude/generate-sunset-video-NhwKZ || true
+          git push origin HEAD || echo "Push skipped (no new artifacts)"
 
       - name: Upload generated images
         uses: actions/upload-artifact@v4
