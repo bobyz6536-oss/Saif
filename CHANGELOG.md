@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [Unreleased]
+
+### 修复 Fixed
+- **CapCut MCP 配置 CapCut MCP config** — 修复了无法连接的 `uvx capcut-ai-editor`（该名称在 PyPI 上不存在），改用开源 CapCutAPI（HTTP API + MCP）| Replaced the broken `uvx capcut-ai-editor` entry (not a PyPI package) with the open-source CapCutAPI (HTTP API + MCP)
+
+### 新增 Added
+- `scripts/setup-capcut-mcp.sh` — 自动克隆并安装 CapCutAPI 的 MCP 依赖 | Auto-clones and installs CapCutAPI MCP dependencies
+- `docs/capcut-mcp.md` — CapCut MCP 集成说明 | CapCut MCP integration guide
+
+---
+
 ## [1.0.0] — 2026-04-09
 
 ### 新增 Added
