@@ -22,6 +22,13 @@
     "capcut": {
       "command": "uvx",
       "args": ["capcut-ai-editor"]
+    },
+    "calliope": {
+      "type": "http",
+      "url": "https://www.calliopelabs.co/api/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_CALLIOPE_API_KEY"
+      }
     }
   }
 }
